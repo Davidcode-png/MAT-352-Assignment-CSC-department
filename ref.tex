@@ -1,0 +1,756 @@
+\documentclass{article}
+
+\usepackage[margin=1.0in]{geometry}
+\usepackage{amsmath}
+\usepackage[table]{xcolor}
+\usepackage{cancel}
+\usepackage{array}
+\usepackage{emoji}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+\newcolumntype{g}{>{\columncolor{Gray}}c}
+\usepackage{fancyhdr}
+
+
+\title{\textbf{MAT 353 Assignment} \\ Tranportation Problem}
+
+\author{GROUP 1, MAT 353 Class}
+\date{
+	Novermber 25, 2022\endgraf\endgraf
+	\vspace{200px}
+	\section*{Question}
+	Sovle an unbalanced Transportation Problem using the:
+	\begin{itemize}
+		 \item \quad Northwest Corner Method
+  		 \item \quad Least Cost First Method
+  		 \item \quad Vogel's Method
+	\end{itemize}
+}
+
+\begin{document}
+	\pagenumbering{gobble}
+	\maketitle
+	\newpage
+
+	\pagenumbering{arabic}
+
+	\pagestyle{fancy}
+	\fancyhead{}
+	\fancyhead[LO,RE]{\textbf{MAT 353 TP Assignment}}
+	\fancyhead[RO,LE]{\textbf{GROUP 1}}
+
+	\section*{Problem Statement}
+	Consider the following Unbalanced Transportation Problem involving three sources and four destinations.
+
+	\begin{center}
+		\begin{tabular}{ |c|c c c c|c| }
+			\hline
+			& \multicolumn{4}{|c|}{Destination} & \\
+			\hline
+			Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply \\
+			\hline
+			$S_{1}$ & 6 & 1 & 9 & 3 & 70 \\
+			$S_{2}$ & 11 & 5 & 2 & 8 & 55 \\
+			$S_{3}$ & 10 & 12 & 4 & 7 & 70 \\
+			\hline
+			Demand & 85 & 35 & 50 & 45 & \\
+			\hline
+		\end{tabular}
+	\end{center}
+
+	\subsection{Check for Balancedness}
+		\qquad $Total Demand = 85 + 35 + 50 + 45 = 215$
+		\qquad $Total Supply = 70 + 55 + 70 = 195$\newline
+
+		This TP is not a balanced TP, the total demand is greater than the supplies.There is 20 more demand than supply
+
+	\subsection{Balance the Problem}
+		\qquad The TP is balanced by adding a new row to complement the total supplies with the supply cost set to zero for each destination.
+
+		\begin{center}
+			\begin{tabular}{ |c|c c c c|c| }
+				\hline
+				& \multicolumn{4}{|c|}{Destination} & \\
+				\hline
+				Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply \\
+				\hline
+				$S_{1}$ & 6 & 1 & 9 & 3 & 70 \\
+				$S_{2}$ & 11 & 5 & 2 & 8 & 55 \\
+				$S_{3}$ & 10 & 12 & 4 & 7 & 70 \\
+				\textbf{S4} & \textbf{0} & \textbf{0} & \textbf{0} & \textbf{0} & \textbf{20}\\
+				\hline
+				Demand & 85 & 35 & 50 & 45 & \cellcolor{gray}\color{white}\textbf{215}\\
+				\hline
+			\end{tabular}
+		\end{center}
+		\qquad The Problem is now balanced.
+
+	\section*{Solution to the Problem}
+		Now that the problem is now balanced, solution to the problem using the three methods of solving a Transportation Problem is given below:
+
+		\setcounter{subsection}{0}
+		\subsection{Northwest Corner Method}
+
+			\paragraph{Starting with the first north-west corner cell of the table ($S_{1}$, $D_{1}$)}
+
+			\begin{center}
+				\begin{tabular}{ |m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}| }
+					\hline
+					& \multicolumn{4}{|c|}{\textbf{Destination}} & \\
+					\hline
+					\textbf{Source} & \textbf{$D_{1}$} & \textbf{$D_{2}$} & \textbf{$D_{3}$} & \textbf{$D_{4}$} & \textbf{Supply} \\
+					\hline
+					\textbf{$S_{1}$} & \cellcolor{gray} \textbf{\emph{70}} \endgraf \qquad\qquad 6 & \emoji{cross-mark} \endgraf \qquad\qquad 1 & \emoji{cross-mark} \endgraf \qquad\qquad 9 & \emoji{cross-mark} \endgraf \qquad\qquad 3 & 70 \tiny{- 70 = 0}\\
+					\hline
+					\textbf{$S_{2}$} & \qquad\qquad 11 & \qquad\qquad 5 & \qquad\qquad 2 & \qquad\qquad 8 & 55 \\
+					% \hline
+					\textbf{$S_{3}$} & \qquad\qquad 10 & \qquad\qquad 12 & \qquad\qquad 4 & \qquad\qquad 7 & 70 \\
+					% \hline
+					\textbf{$S_{4}$} & \qquad\qquad 0 & \qquad\qquad 0 & \qquad\qquad 0 & \qquad\qquad 0 & 20\\
+					\hline
+					\textbf{Demand} & 85 \tiny{- 70 = 15} & 35 & 50 & 45 & \\
+					\hline
+				\end{tabular}
+			\end{center}
+
+
+			\paragraph{The next north-west corner cell of the table ($S_{2}$, $D_{1}$)}
+
+			\begin{center}
+				\begin{tabular}{ |m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}| }
+					\hline
+					& \multicolumn{4}{|c|}{\textbf{Destination}} & \\
+					\hline
+					\textbf{Source} & \textbf{$D_{1}$} & \textbf{$D_{2}$} & \textbf{$D_{3}$} & \textbf{$D_{4}$} & \textbf{Supply} \\
+					\hline
+					\textbf{$S_{1}$} & \cellcolor{gray} \textbf{\emph{70}} \endgraf \qquad\qquad 6 & \emoji{cross-mark} \endgraf \qquad\qquad 1 & \emoji{cross-mark} \endgraf \qquad\qquad 9 & \emoji{cross-mark} \endgraf \qquad\qquad 3 & 70 \tiny{- 70 = 0}\\
+					\hline
+					\textbf{$S_{2}$} & \cellcolor{gray} \textbf{\emph{15}} \endgraf \qquad\qquad 11 & \qquad\qquad 5 & \qquad\qquad 2 & \qquad\qquad 8 & 55 \tiny{- 15 = 40} \\
+					\hline
+					\textbf{$S_{3}$} & \emoji{cross-mark} \endgraf \qquad\qquad 10 & \qquad\qquad 12 & \qquad\qquad 4 & \qquad\qquad 7 & 70 \\
+					% \hline
+					\textbf{$S_{4}$} & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \qquad\qquad 0 & \qquad\qquad 0 & \qquad\qquad 0 & 20\\
+					\hline
+					\textbf{Demand} & 85 \tiny{- 70 = 15} \endgraf  \tiny{15 - 15 = 0} \emoji{check-mark-button} & 35 & 50 & 45 & \\
+					\hline
+				\end{tabular}
+			\end{center}
+
+
+
+			\paragraph{The next north-west corner cell of the table ($S_{2}$, $D_{2}$)}
+
+			\begin{center}
+				\begin{tabular}{ |m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}| }
+					\hline
+					& \multicolumn{4}{|c|}{\textbf{Destination}} & \\
+					\hline
+					\textbf{Source} & \textbf{$D_{1}$} & \textbf{$D_{2}$} & \textbf{$D_{3}$} & \textbf{$D_{4}$} & \textbf{Supply} \\
+					\hline
+					\textbf{$S_{1}$} & \cellcolor{gray} \textbf{\emph{70}} \endgraf \qquad\qquad 6 & \emoji{cross-mark} \endgraf \qquad\qquad 1 & \emoji{cross-mark} \endgraf \qquad\qquad 9 & \emoji{cross-mark} \endgraf \qquad\qquad 3 & 70 \tiny{- 70 = 0}\\
+					\hline
+					\textbf{$S_{2}$} & \cellcolor{gray} \textbf{\emph{15}} \endgraf \qquad\qquad 11 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 5 & \qquad\qquad 2 & \qquad\qquad 8 & 55 \tiny{- 15 = 40} \endgraf \tiny{40 - 35 = 5}\\
+					\hline
+					\textbf{$S_{3}$} & \emoji{cross-mark} \endgraf \qquad\qquad 10 & \emoji{cross-mark} \endgraf \qquad\qquad 12 & \qquad\qquad 4 & \qquad\qquad 7 & 70 \\
+					% \hline
+					\textbf{$S_{4}$} & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \qquad\qquad 0 & \qquad\qquad 0 & 20\\
+					\hline
+					\textbf{Demand} & 85 \tiny{- 70 = 15} \endgraf  \tiny{15 - 15 = 0} \emoji{check-mark-button} & 35 \tiny{- 35 = 0} \emoji{check-mark-button} & 50 & 45 & \\
+					\hline
+				\end{tabular}
+			\end{center}
+
+
+			\paragraph{The next north-west corner cell of the table ($S_{2}$, $D_{3}$)}
+
+			\begin{center}
+				\begin{tabular}{ |m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}| }
+					\hline
+					& \multicolumn{4}{|c|}{\textbf{Destination}} & \\
+					\hline
+					\textbf{Source} & \textbf{$D_{1}$} & \textbf{$D_{2}$} & \textbf{$D_{3}$} & \textbf{$D_{4}$} & \textbf{Supply} \\
+					\hline
+					\textbf{$S_{1}$} & \cellcolor{gray} \textbf{\emph{70}} \endgraf \qquad\qquad 6 & \emoji{cross-mark} \endgraf \qquad\qquad 1 & \emoji{cross-mark} \endgraf \qquad\qquad 9 & \emoji{cross-mark} \endgraf \qquad\qquad 3 & 70 \tiny{- 70 = 0}\\
+					\hline
+					\textbf{$S_{2}$} & \cellcolor{gray} \textbf{\emph{15}} \endgraf \qquad\qquad 11 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 5 & \cellcolor{gray} \textbf{\emph{5}} \endgraf \qquad\qquad 2 & \emoji{cross-mark} \endgraf \qquad\qquad 8 & 55 \tiny{- 15 = 40} \endgraf \tiny{40 - 35 = 5} \endgraf \tiny{5 - 5 = 0}\\
+					\hline
+					\textbf{$S_{3}$} & \emoji{cross-mark} \endgraf \qquad\qquad 10 & \emoji{cross-mark} \endgraf \qquad\qquad 12 & \qquad\qquad 4 & \qquad\qquad 7 & 70 \\
+					% \hline
+					\textbf{$S_{4}$} & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \qquad\qquad 0 & \qquad\qquad 0 & 20\\
+					\hline
+					\textbf{Demand} & 85 \tiny{- 70 = 15} \endgraf  \tiny{15 - 15 = 0} \emoji{check-mark-button} & 35 \tiny{- 35 = 0} \emoji{check-mark-button} & 50 \tiny{- 5 = 45} & 45 & \\
+					\hline
+				\end{tabular}
+			\end{center}
+
+
+			\paragraph{The next north-west corner cell of the table ($S_{3}$, $D_{3}$)}
+
+			\begin{center}
+				\begin{tabular}{ |m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}| }
+					\hline
+					& \multicolumn{4}{|c|}{\textbf{Destination}} & \\
+					\hline
+					\textbf{Source} & \textbf{$D_{1}$} & \textbf{$D_{2}$} & \textbf{$D_{3}$} & \textbf{$D_{4}$} & \textbf{Supply} \\
+					\hline
+					\textbf{$S_{1}$} & \cellcolor{gray} \textbf{\emph{70}} \endgraf \qquad\qquad 6 & \emoji{cross-mark} \endgraf \qquad\qquad 1 & \emoji{cross-mark} \endgraf \qquad\qquad 9 & \emoji{cross-mark} \endgraf \qquad\qquad 3 & 70 \tiny{- 70 = 0}\\
+					\hline
+					\textbf{$S_{2}$} & \cellcolor{gray} \textbf{\emph{15}} \endgraf \qquad\qquad 11 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 5 & \cellcolor{gray} \textbf{\emph{5}} \endgraf \qquad\qquad 2 & \emoji{cross-mark} \endgraf \qquad\qquad 8 & 55 \tiny{- 15 = 40} \endgraf \tiny{40 - 35 = 5} \endgraf \tiny{5 - 5 = 0}\\
+					\hline
+					\textbf{$S_{3}$} & \emoji{cross-mark} \endgraf \qquad\qquad 10 & \emoji{cross-mark} \endgraf \qquad\qquad 12 & \cellcolor{gray} \textbf{\emph{45}} \endgraf \qquad\qquad 4 & \qquad\qquad 7 & 70 \tiny{- 45 = 25} \\
+					\hline
+					\textbf{$S_{4}$} & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \qquad\qquad 0 & 20\\
+					\hline
+					\textbf{Demand} & 85 \tiny{- 70 = 15} \endgraf  \tiny{15 - 15 = 0} \emoji{check-mark-button} & 35 \tiny{- 35 = 0} \emoji{check-mark-button} & 50 \tiny{- 5 = 45} \endgraf  \tiny{45 - 45 = 0} \emoji{check-mark-button} & 45 & \\
+					\hline
+				\end{tabular}
+			\end{center}
+
+
+
+
+			\paragraph{The next north-west corner cell of the table ($S_{3}$, $D_{4}$)}
+
+			\begin{center}
+				\begin{tabular}{ |m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}| }
+					\hline
+					& \multicolumn{4}{|c|}{\textbf{Destination}} & \\
+					\hline
+					\textbf{Source} & \textbf{$D_{1}$} & \textbf{$D_{2}$} & \textbf{$D_{3}$} & \textbf{$D_{4}$} & \textbf{Supply} \\
+					\hline
+					\textbf{$S_{1}$} & \cellcolor{gray} \textbf{\emph{70}} \endgraf \qquad\qquad 6 & \emoji{cross-mark} \endgraf \qquad\qquad 1 & \emoji{cross-mark} \endgraf \qquad\qquad 9 & \emoji{cross-mark} \endgraf \qquad\qquad 3 & 70 \tiny{- 70 = 0}\\
+					\hline
+					\textbf{$S_{2}$} & \cellcolor{gray} \textbf{\emph{15}} \endgraf \qquad\qquad 11 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 5 & \cellcolor{gray} \textbf{\emph{5}} \endgraf \qquad\qquad 2 & \emoji{cross-mark} \endgraf \qquad\qquad 8 & 55 \tiny{- 15 = 40} \endgraf \tiny{40 - 35 = 5} \endgraf \tiny{5 - 5 = 0}\\
+					\hline
+					\textbf{$S_{3}$} & \emoji{cross-mark} \endgraf \qquad\qquad 10 & \emoji{cross-mark} \endgraf \qquad\qquad 12 & \cellcolor{gray} \textbf{\emph{45}} \endgraf \qquad\qquad 4 & \cellcolor{gray} \textbf{\emph{25}} \endgraf \qquad\qquad 7 & 70 \tiny{- 45 = 25} \endgraf \tiny{25 - 25 = 0}\\
+					\hline
+					\textbf{$S_{4}$} & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \qquad\qquad 0 & 20\\
+					\hline
+					\textbf{Demand} & 85 \tiny{- 70 = 15} \endgraf  \tiny{15 - 15 = 0} \emoji{check-mark-button} & 35 \tiny{- 35 = 0} \emoji{check-mark-button} & 50 \tiny{- 5 = 45} \endgraf  \tiny{45 - 45 = 0} \emoji{check-mark-button} & 45 \tiny{- 25 = 20} & \\
+					\hline
+				\end{tabular}
+			\end{center}
+
+
+
+
+			\paragraph{And the last north-west corner cell of the table ($S_{4}$, $D_{4}$)}
+
+			\begin{center}
+				\begin{tabular}{ |m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}| }
+					\hline
+					& \multicolumn{4}{|c|}{\textbf{Destination}} & \\
+					\hline
+					\textbf{Source} & \textbf{$D_{1}$} & \textbf{$D_{2}$} & \textbf{$D_{3}$} & \textbf{$D_{4}$} & \textbf{Supply} \\
+					\hline
+					\textbf{$S_{1}$} & \cellcolor{gray} \textbf{\emph{70}} \endgraf \qquad\qquad 6 & \emoji{cross-mark} \endgraf \qquad\qquad 1 & \emoji{cross-mark} \endgraf \qquad\qquad 9 & \emoji{cross-mark} \endgraf \qquad\qquad 3 & 70 \tiny{- 70 = 0}\\
+					\hline
+					\textbf{$S_{2}$} & \cellcolor{gray} \textbf{\emph{15}} \endgraf \qquad\qquad 11 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 5 & \cellcolor{gray} \textbf{\emph{5}} \endgraf \qquad\qquad 2 & \emoji{cross-mark} \endgraf \qquad\qquad 8 & 55 \tiny{- 15 = 40} \endgraf \tiny{40 - 35 = 5} \endgraf \tiny{5 - 5 = 0}\\
+					\hline
+					\textbf{$S_{3}$} & \emoji{cross-mark} \endgraf \qquad\qquad 10 & \emoji{cross-mark} \endgraf \qquad\qquad 12 & \cellcolor{gray} \textbf{\emph{45}} \endgraf \qquad\qquad 4 & \cellcolor{gray} \textbf{\emph{25}} \endgraf \qquad\qquad 7 & 70 \tiny{- 45 = 25} \endgraf \tiny{25 - 25 = 0}\\
+					\hline
+					\textbf{$S_{4}$} & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \cellcolor{gray} \textbf{\emph{20}} \endgraf \qquad\qquad 0 & 20 \tiny{ - 20 = 0}\\
+					\hline
+					\textbf{Demand} & 85 \tiny{- 70 = 15} \endgraf  \tiny{15 - 15 = 0} \emoji{check-mark-button} & 35 \tiny{- 35 = 0} \emoji{check-mark-button} & 50 \tiny{- 5 = 45} \endgraf  \tiny{45 - 45 = 0} \emoji{check-mark-button} & 45 \tiny{- 25 = 20} \endgraf \tiny{20 - 20 = 0} \emoji{check-mark-button} & \\
+					\hline
+				\end{tabular}
+			\end{center}
+
+			\vspace{70px}
+			Therefore, the Initial Basic Feasible Solution Table to the TP problem using the Northwest Corner Method is
+
+			\begin{center}
+				\begin{tabular}{ |m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}| }
+
+					\hline
+					& \multicolumn{4}{|c|}{\textbf{Destination}} & \\
+					\hline
+
+					Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply\\
+					\hline
+					$S_{1}$ & \textbf{\emph{70}} \endgraf \qquad\qquad 6 & \endgraf \qquad\qquad 1 & \endgraf \qquad\qquad 9 & \endgraf \qquad\qquad 3 & 70\\
+					\hline
+					$S_{2}$ & \textbf{\emph{15}} \endgraf \qquad\qquad 11 & \textbf{\emph{35}} \endgraf \qquad\qquad 5 & \textbf{\emph{5}} \endgraf \qquad\qquad 2 & \endgraf \qquad\qquad 8 & 55\\
+					\hline
+					$S_{3}$& \endgraf \qquad\qquad 10 & \endgraf \qquad\qquad 12 & \textbf{\emph{45}} \endgraf \qquad\qquad 4 & \textbf{\emph{25}} \endgraf \qquad\qquad 7 & 70\\
+					\hline
+					$S_{4}$& \endgraf \qquad\qquad 0 & \endgraf \qquad\qquad 0 & \endgraf \qquad\qquad 0 & \textbf{\emph{20}} \endgraf \qquad\qquad 0 & 20\\
+					\hline
+					Demand & 85 & 35 & 50 & 45 & \\
+					\hline
+
+				\end{tabular}
+			\end{center}
+
+			The Total cost = $(70 \times 6) + (15 \times 11) + (35 \times 5) + (5 \times 2) + (45 \times 4) + (25 \times 7) + (20 \times 0) = 420 + 165 + 175 + 10 + 180 + 175 + 0 $ \\
+			\begin{center}
+			$ = \textnaira {\Large 1,125}$
+			\end{center}
+
+		\vspace{100px}
+		\subsection{Least Cost First Method}
+			\begin{center}
+				\begin{tabular}{ |c|c c c c|c| }
+					\hline
+					& \multicolumn{4}{|c|}{Destination} & \\
+					\hline
+					Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply \\
+					\hline
+					$S_{1}$ & 6 & 1 & 9 & 3 & 70 \\
+					$S_{2}$ & 11 & 5 & 2 & 8 & 55 \\
+					$S_{3}$ & 10 & 12 & 4 & 7 & 70 \\
+					$S_{4}$ & 0 & 0 & 0 & 0 & 20\\
+					\hline
+					Demand & 85 & 35 & 50 & 45 & \\
+					\hline
+				\end{tabular}
+			\end{center}
+
+			\paragraph{The Initial least cost from the table above ($S_{4}$, $D_{1}$)}
+				\begin{center}
+					\begin{tabular}{|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|}
+						\hline
+						& \multicolumn{4}{|c|}{Destination} & \\
+						\hline
+						Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply \\
+						\hline
+						$S_{1}$ & 6 & 1 & 9 & 3 & 70 \\
+						$S_{2}$ & 11 & 5 & 2 & 8 & 55 \\
+						$S_{3}$ & 10 & 12 & 4 & 7 & 70 \\
+						\hline
+						$S_{4}$ & \cellcolor{gray} \textbf{\emph{20}} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & 20 \tiny{ - 20 = 0} \\
+						\hline
+						Demand & 85 \tiny{ - 20 = 65} & 35 & 50 & 45 & \\
+						\hline
+					\end{tabular}
+				\end{center}
+
+			\paragraph{The Next least cost from the table above ($S_{1}$, $D_{2}$)}
+				\begin{center}
+					\begin{tabular}{|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|}
+						\hline
+						& \multicolumn{4}{|c|}{Destination} & \\
+						\hline
+						Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply \\
+						\hline
+						$S_{1}$ & 6 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 1 & 9 & 3 & 70 \tiny{ - 35 = 45}\\
+						\hline
+						$S_{2}$ & 11 & \emoji{cross-mark} \endgraf \qquad\qquad 5 & 2 & 8 & 55 \\
+						$S_{3}$ & 10 & \emoji{cross-mark} \endgraf \qquad\qquad 12 & 4 & 7 & 70 \\
+						\hline
+						$S_{4}$ & \cellcolor{gray} \textbf{\emph{20}} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & 20 \tiny{ - 20 = 0} \\
+						\hline
+						Demand & 85 \tiny{ - 20 = 65} & 35 \tiny{ - 35 = 0} \emoji{check-mark-button} & 50 & 45 & \\
+						\hline
+					\end{tabular}
+				\end{center}
+
+
+			\paragraph{The Next least cost from the table above ($S_{2}$, $D_{3}$)}
+				\begin{center}
+					\begin{tabular}{|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|}
+						\hline
+						& \multicolumn{4}{|c|}{Destination} & \\
+						\hline
+						Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply \\
+						\hline
+						$S_{1}$ & 6 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 1 & 9 & 3 & 70 \tiny{ - 35 = 35}\\
+						\hline
+						$S_{2}$ & 11 & \emoji{cross-mark} \endgraf \qquad\qquad 5 &  \cellcolor{gray} \textbf{\emph{50}} \endgraf \qquad\qquad 2 & 8 & 55 \tiny{- 50 = 5} \\
+						\hline
+						$S_{3}$ & 10 & \emoji{cross-mark} \endgraf \qquad\qquad 12 & \emoji{cross-mark} \endgraf \qquad\qquad 4 & 7 & 70 \\
+						\hline
+						$S_{4}$ & \cellcolor{gray} \textbf{\emph{20}} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & 20 \tiny{ - 20 = 0} \\
+						\hline
+						Demand & 85 \tiny{ - 20 = 65} & 35 \tiny{ - 35 = 0} \emoji{check-mark-button} & 50 \tiny{- 50 = 0} \emoji{check-mark-button} & 45 & \\
+						\hline
+					\end{tabular}
+				\end{center}
+
+
+			\paragraph{The Next least cost from the table above ($S_{1}$, $D_{4}$)}
+				\begin{center}
+					\begin{tabular}{|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|}
+						\hline
+						& \multicolumn{4}{|c|}{Destination} & \\
+						\hline
+						Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply \\
+						\hline
+						$S_{1}$ & \emoji{cross-mark} \endgraf \qquad\qquad 6 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 1 & \emoji{cross-mark} \endgraf \qquad\qquad 9 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 3 & 70 \tiny{ - 35 = 35} \endgraf \tiny{35 - 35 = 0} \\
+						\hline
+						$S_{2}$ & 11 & \emoji{cross-mark} \endgraf \qquad\qquad 5 &  \cellcolor{gray} \textbf{\emph{50}} \endgraf \qquad\qquad 2 & 8 & 55 \tiny{- 50 = 5} \\
+						\hline
+						$S_{3}$ & 10 & \emoji{cross-mark} \endgraf \qquad\qquad 12 & \emoji{cross-mark} \endgraf \qquad\qquad 4 & 7 & 70 \\
+						\hline
+						$S_{4}$ & \cellcolor{gray} \textbf{\emph{20}} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & 20 \tiny{ - 20 = 0} \\
+						\hline
+						Demand & 85 \tiny{ - 20 = 65} & 35 \tiny{ - 35 = 0} \emoji{check-mark-button} & 50 \tiny{- 50 = 0} \emoji{check-mark-button} & 45 \tiny{ - 35 = 10} & \\
+						\hline
+					\end{tabular}
+				\end{center}
+
+			\paragraph{The Next least cost from the table above ($S_{3}$, $D_{4}$)}
+				\begin{center}
+					\begin{tabular}{|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|}
+						\hline
+						& \multicolumn{4}{|c|}{Destination} & \\
+						\hline
+						Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply \\
+						\hline
+						$S_{1}$ & \emoji{cross-mark} \endgraf \qquad\qquad 6 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 1 & \emoji{cross-mark} \endgraf \qquad\qquad 9 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 3 & 70 \tiny{ - 35 = 35} \endgraf \tiny{35 - 35 = 0} \\
+						\hline
+						$S_{2}$ & 11 & \emoji{cross-mark} \endgraf \qquad\qquad 5 &  \cellcolor{gray} \textbf{\emph{50}} \endgraf \qquad\qquad 2 & \emoji{cross-mark} \endgraf \qquad\qquad 8 & 55 \tiny{- 50 = 5} \\
+						\hline
+						$S_{3}$ & 10 & \emoji{cross-mark} \endgraf \qquad\qquad 12 & \emoji{cross-mark} \endgraf \qquad\qquad 4 & \cellcolor{gray} \textbf{\emph{10}} \endgraf \qquad\qquad 7 & 70 \tiny{ - 10 = 60} \\
+						\hline
+						$S_{4}$ & \cellcolor{gray} \textbf{\emph{20}} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & 20 \tiny{ - 20 = 0} \\
+						\hline
+						Demand & 85 \tiny{ - 20 = 65} & 35 \tiny{ - 35 = 0} \emoji{check-mark-button} & 50 \tiny{- 50 = 0} \emoji{check-mark-button} & 45 \tiny{ - 35 = 10} \endgraf \tiny{10 - 10 = 0} \emoji{check-mark-button} & \\
+						\hline
+					\end{tabular}
+				\end{center}
+
+			\paragraph{The Next least cost from the table above ($S_{3}$, $D_{1}$)}
+				\begin{center}
+					\begin{tabular}{|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|}
+						\hline
+						& \multicolumn{4}{|c|}{Destination} & \\
+						\hline
+						Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply \\
+						\hline
+						$S_{1}$ & \emoji{cross-mark} \endgraf \qquad\qquad 6 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 1 & \emoji{cross-mark} \endgraf \qquad\qquad 9 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 3 & 70 \tiny{ - 35 = 35} \endgraf \tiny{35 - 35 = 0} \\
+						\hline
+						$S_{2}$ & 11 & \emoji{cross-mark} \endgraf \qquad\qquad 5 &  \cellcolor{gray} \textbf{\emph{50}} \endgraf \qquad\qquad 2 & \emoji{cross-mark} \endgraf \qquad\qquad 8 & 55 \tiny{- 50 = 5} \\
+						\hline
+						$S_{3}$ & \cellcolor{gray} \textbf{\emph{60}} \endgraf \qquad\qquad 10 & \emoji{cross-mark} \endgraf \qquad\qquad 12 & \emoji{cross-mark} \endgraf \qquad\qquad 4 & \cellcolor{gray} \textbf{\emph{10}} \endgraf \qquad\qquad 7 & 70 \tiny{ - 10 = 60} \\
+						\hline
+						$S_{4}$ & \cellcolor{gray} \textbf{\emph{20}} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & 20 \tiny{ - 20 = 0} \\
+						\hline
+						Demand & 85 \tiny{ - 20 = 65} \endgraf \tiny{65 - 60 = 5} & 35 \tiny{ - 35 = 0} \emoji{check-mark-button} & 50 \tiny{- 50 = 0} \emoji{check-mark-button} & 45 \tiny{ - 35 = 10} \endgraf \tiny{10 - 10 = 0} \emoji{check-mark-button} & \\
+						\hline
+					\end{tabular}
+				\end{center}
+
+		\paragraph{The last least cost from the table above ($S_{2}$, $D_{1}$)}
+				\begin{center}
+					\begin{tabular}{|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|}
+						\hline
+						& \multicolumn{4}{|c|}{Destination} & \\
+						\hline
+						Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply \\
+						\hline
+						$S_{1}$ & \emoji{cross-mark} \endgraf \qquad\qquad 6 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 1 & \emoji{cross-mark} \endgraf \qquad\qquad 9 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 3 & 70 \tiny{ - 35 = 35} \endgraf \tiny{35 - 35 = 0} \\
+						\hline
+						$S_{2}$ & \cellcolor{gray} \textbf{\emph{5}} \endgraf \qquad\qquad 11 & \emoji{cross-mark} \endgraf \qquad\qquad 5 &  \cellcolor{gray} \textbf{\emph{50}} \endgraf \qquad\qquad 2 & \emoji{cross-mark} \endgraf \qquad\qquad 8 & 55 \tiny{- 50 = 5} \\
+						\hline
+						$S_{3}$ & \cellcolor{gray} \textbf{\emph{60}} \endgraf \qquad\qquad 10 & \emoji{cross-mark} \endgraf \qquad\qquad 12 & \emoji{cross-mark} \endgraf \qquad\qquad 4 & \cellcolor{gray} \textbf{\emph{10}} \endgraf \qquad\qquad 7 & 70 \tiny{ - 10 = 60} \\
+						\hline
+						$S_{4}$ & \cellcolor{gray} \textbf{\emph{20}} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & 20 \tiny{ - 20 = 0} \\
+						\hline
+						Demand & 85 \tiny{ - 20 = 65} \endgraf \tiny{65 - 60 = 5} \endgraf \tiny{5 - 5 = 0} \emoji{check-mark-button} & 35 \tiny{ - 35 = 0} \emoji{check-mark-button} & 50 \tiny{- 50 = 0} \emoji{check-mark-button} & 45 \tiny{ - 35 = 10} \endgraf \tiny{10 - 10 = 0} \emoji{check-mark-button} & \\
+						\hline
+					\end{tabular}
+				\end{center}
+
+
+		\vspace{70px}
+			Therefore, the Initial Basic Feasible Solution Table to the TP problem using the Least Cost First Method is
+
+			\begin{center}
+				\begin{tabular}{ |m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}| }
+
+					\hline
+					& \multicolumn{4}{|c|}{\textbf{Destination}} & \\
+					\hline
+
+					Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply\\
+					\hline
+					$S_{1}$ &  \endgraf \qquad\qquad 6 & \textbf{\emph{35}} \endgraf \qquad\qquad 1 & \endgraf \qquad\qquad 9 & \textbf{\emph{35}} \endgraf \qquad\qquad 3 & 70\\
+					\hline
+					$S_{2}$ & \textbf{\emph{5}} \endgraf \qquad\qquad 11 & \endgraf \qquad\qquad 5 & \textbf{\emph{50}} \endgraf \qquad\qquad 2 & \endgraf \qquad\qquad 8 & 55\\
+					\hline
+					$S_{3}$& \textbf{\emph{60}} \endgraf \qquad\qquad 10 & \endgraf \qquad\qquad 12 & \endgraf \qquad\qquad 4 & \textbf{\emph{10}} \endgraf \qquad\qquad 7 & 70\\
+					\hline
+					$S_{4}$& \textbf{\emph{20}} \endgraf \qquad\qquad 0 & \endgraf \qquad\qquad 0 & \endgraf \qquad\qquad 0 & \endgraf \qquad\qquad 0 & 20\\
+					\hline
+					Demand & 85 & 35 & 50 & 45 & \\
+					\hline
+
+				\end{tabular}
+			\end{center}
+
+
+		The Total cost = $(35 \times 1) + (35 \times 3) + (5 \times 11) + (50 \times 2) + (60 \times 10) + (10 \times 7) + (20 \times 0) = 35 + 105 + 55 + 100 + 600 + 70 + 0 $ \\
+			\begin{center}
+			$ = \textnaira {\Large 965}$
+			\end{center}
+
+
+
+		\vspace{100px}
+		\subsection{Vogel's First Method}
+			\begin{center}
+				\begin{tabular}{ |c|c c c c|c| }
+					\hline
+					& \multicolumn{4}{|c|}{Destination} & \\
+					\hline
+					Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply \\
+					\hline
+					$S_{1}$ & 6 & 1 & 9 & 3 & 70 \\
+					$S_{2}$ & 11 & 5 & 2 & 8 & 55 \\
+					$S_{3}$ & 10 & 12 & 4 & 7 & 70 \\
+					$S_{4}$ & 0 & 0 & 0 & 0 & 20\\
+					\hline
+					Demand & 85 & 35 & 50 & 45 & \\
+					\hline
+				\end{tabular}
+			\end{center}
+
+			\paragraph{Calculating the penalty cost for each row and column in the table above}
+
+			\begin{center}
+				\begin{tabular}{ |m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|g| }
+
+					\hline
+					& \multicolumn{4}{|c|}{\textbf{Destination}} & & \\
+					\hline
+
+					Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply & Penalty\\
+					\hline
+
+					$S_{1}$ &  6 & 1 & 9 & 3 & 70 & 3 - 1 = 2\\
+					$S_{2}$ & 11 & 5 & 2 & 8 & 55 & 5 - 2 = 3\\
+					$S_{3}$ & 10 & 12 & 4 & 7 & 70 & 7 - 4 = 3\\
+					\hline
+					$S_{4}$ & \cellcolor{gray} \textbf{\emph{20}} \endgraf \qquad\qquad  0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & 20 \tiny{ - 20 = 0} & 0 - 0 = 0\\
+					\hline
+					Demand & 85 \tiny{ - 20 = 65} & 35 & 50 & 45 & &\\
+					\hline
+					\rowcolor{Gray}
+					penalty & 6 - 0 = 6 & 1 - 0 = 1 & 2 - 0 = 2 & 3 - 0 = 3 & & max = 6 \endgraf \qquad LC = 0\\
+					\hline
+
+				\end{tabular}
+			\end{center}
+
+		\paragraph{Calculating the next penalty cost for each row and column in the table above}
+
+			\begin{center}
+				\begin{tabular}{ |m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|g| }
+
+					\hline
+					& \multicolumn{4}{|c|}{\textbf{Destination}} & & \\
+					\hline
+
+					Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply & Penalty\\
+					\hline
+
+					$S_{1}$ & \endgraf \qquad\qquad 6 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 1 & \endgraf \qquad\qquad 9 & \endgraf \qquad\qquad 3 & 70 \tiny{ - 35 = 35} & 3 - 1 = 2\\
+					\hline
+					$S_{2}$ & \endgraf \qquad\qquad 11 & \emoji{cross-mark} \endgraf \qquad\qquad 5 & \endgraf \qquad\qquad 2 & \endgraf \qquad\qquad 8 & 55 & 5 - 2 = 3\\
+					\hline
+					$S_{3}$ & \endgraf \qquad\qquad 10 & \emoji{cross-mark} \endgraf \qquad\qquad 12 & \endgraf \qquad\qquad 4 & \endgraf \qquad\qquad 7 & 70 & 7 - 4 = 3\\
+					\hline
+					$S_{4}$ & \cellcolor{gray} \textbf{\emph{20}} \endgraf \qquad\qquad  0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & 20 \tiny{ - 20 = 0} & \\
+					\hline
+					Demand & 85 \tiny{ - 20 = 65} & 35 \tiny{ - 35 = 0} \emoji{check-mark-button} & 50 & 45 & &\\
+					\hline
+					\rowcolor{Gray}
+					penalty & 10 - 6 = 4 & 5 - 1 = 4 & 4 - 2 = 2 & 7 - 3 = 4 & & max = 4 \endgraf \qquad LC = 1\\
+					\hline
+
+				\end{tabular}
+			\end{center}
+
+
+
+
+		\paragraph{Calculating the next penalty cost for each row and column in the table above}
+
+			\begin{center}
+				\begin{tabular}{ |m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|g| }
+
+					\hline
+					& \multicolumn{4}{|c|}{\textbf{Destination}} & & \\
+					\hline
+
+					Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply & Penalty\\
+					\hline
+
+					$S_{1}$ & \endgraf \qquad\qquad 6 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 1 & \emoji{cross-mark} \endgraf \qquad\qquad 9 & \endgraf \qquad\qquad 3 & 70 \tiny{ - 35 = 35} & 6 - 3 = 3\\
+					\hline
+					$S_{2}$ & \endgraf \qquad\qquad 11 & \emoji{cross-mark} \endgraf \qquad\qquad 5 &  \cellcolor{gray} \textbf{\emph{50}} \endgraf \qquad\qquad 2 & \endgraf \qquad\qquad 8 & 55 \tiny{ - 50 = 5} & 8 - 2 = 6\\
+					\hline
+					$S_{3}$ & \endgraf \qquad\qquad 10 & \emoji{cross-mark} \endgraf \qquad\qquad 12 & \emoji{cross-mark} \endgraf \qquad\qquad 4 & \endgraf \qquad\qquad 7 & 70 & 7 - 4 = 3\\
+					\hline
+					$S_{4}$ & \cellcolor{gray} \textbf{\emph{20}} \endgraf \qquad\qquad  0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & 20 \tiny{ - 20 = 0} & \\
+					\hline
+					Demand & 85 \tiny{ - 20 = 65} & 35 \tiny{ - 35 = 0} \emoji{check-mark-button} & 50 \tiny{ - 50 = 0} \emoji{check-mark-button} & 45 & &\\
+					\hline
+					\rowcolor{Gray}
+					penalty & 10 - 6 = 4 & & 4 - 2 = 2 & 7 - 3 = 4 & & max = 6 \endgraf \qquad LC = 2\\
+					\hline
+
+				\end{tabular}
+			\end{center}
+
+
+
+		\paragraph{Calculating the next penalty cost for each row and column in the table above}
+
+			\begin{center}
+				\begin{tabular}{ |m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|g| }
+
+					\hline
+					& \multicolumn{4}{|c|}{\textbf{Destination}} & & \\
+					\hline
+
+					Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply & Penalty\\
+					\hline
+
+					$S_{1}$ & \emoji{cross-mark} \endgraf \qquad\qquad 6 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 1 & \emoji{cross-mark} \endgraf \qquad\qquad 9 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 3 & 70 \tiny{ - 35 = 35} \endgraf \tiny{35 - 35 = 0} & 6 - 3 = 3\\
+					\hline
+					$S_{2}$ & \endgraf \qquad\qquad 11 & \emoji{cross-mark} \endgraf \qquad\qquad 5 &  \cellcolor{gray} \textbf{\emph{50}} \endgraf \qquad\qquad 2 & \endgraf \qquad\qquad 8 & 55 \tiny{ - 50 = 5} & 11 - 8 = 3\\
+					\hline
+					$S_{3}$ & \endgraf \qquad\qquad 10 & \emoji{cross-mark} \endgraf \qquad\qquad 12 & \emoji{cross-mark} \endgraf \qquad\qquad 4 & \endgraf \qquad\qquad 7 & 70 & 10 - 7 = 3\\
+					\hline
+					$S_{4}$ & \cellcolor{gray} \textbf{\emph{20}} \endgraf \qquad\qquad  0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & 20 \tiny{ - 20 = 0} & \\
+					\hline
+					Demand & 85 \tiny{ - 20 = 65} & 35 \tiny{ - 35 = 0} \emoji{check-mark-button} & 50 \tiny{ - 50 = 0} \emoji{check-mark-button} & 45 \tiny{ - 35 = 10} & &\\
+					\hline
+					\rowcolor{Gray}
+					penalty & 10 - 6 = 4 & & & 7 - 3 = 4 & & max = 4 \endgraf \qquad LC = 3\\
+					\hline
+
+				\end{tabular}
+			\end{center}
+
+
+		\paragraph{Calculating the next penalty cost for each row and column in the table above}
+
+			\begin{center}
+				\begin{tabular}{ |m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|g| }
+
+					\hline
+					& \multicolumn{4}{|c|}{\textbf{Destination}} & & \\
+					\hline
+
+					Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply & Penalty\\
+					\hline
+
+					$S_{1}$ & \emoji{cross-mark} \endgraf \qquad\qquad 6 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 1 & \emoji{cross-mark} \endgraf \qquad\qquad 9 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 3 & 70 \tiny{ - 35 = 35} \endgraf \tiny{35 - 35 = 0} & \\
+					\hline
+					$S_{2}$ & \endgraf \qquad\qquad 11 & \emoji{cross-mark} \endgraf \qquad\qquad 5 &  \cellcolor{gray} \textbf{\emph{50}} \endgraf \qquad\qquad 2 & \emoji{cross-mark} \endgraf \qquad\qquad 8 & 55 \tiny{ - 50 = 5} & 11 - 8 = 3\\
+					\hline
+					$S_{3}$ & \endgraf \qquad\qquad 10 & \emoji{cross-mark} \endgraf \qquad\qquad 12 & \emoji{cross-mark} \endgraf \qquad\qquad 4 & \cellcolor{gray} \textbf{\emph{10}} \endgraf \qquad\qquad 7 & 70 \tiny{ - 10 = 60} & 10 - 7 = 3\\
+					\hline
+					$S_{4}$ & \cellcolor{gray} \textbf{\emph{20}} \endgraf \qquad\qquad  0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & 20 \tiny{ - 20 = 0} & \\
+					\hline
+					Demand & 85 \tiny{ - 20 = 65} & 35 \tiny{ - 35 = 0} \emoji{check-mark-button} & 50 \tiny{ - 50 = 0} \emoji{check-mark-button} & 45 \tiny{ - 35 = 10} \endgraf \tiny{10 - 10 = 0} \emoji{check-mark-button} & &\\
+					\hline
+					\rowcolor{Gray}
+					penalty & 11 - 10 = 1 & & & 8 - 7 = 1 & & max = 3 \endgraf \qquad LC = 7\\
+					\hline
+
+				\end{tabular}
+			\end{center}
+
+
+
+
+		\paragraph{Calculating the next penalty cost for each row and column in the table above}
+
+			\begin{center}
+				\begin{tabular}{ |m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|g| }
+
+					\hline
+					& \multicolumn{4}{|c|}{\textbf{Destination}} & & \\
+					\hline
+
+					Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply & Penalty\\
+					\hline
+
+					$S_{1}$ & \emoji{cross-mark} \endgraf \qquad\qquad 6 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 1 & \emoji{cross-mark} \endgraf \qquad\qquad 9 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 3 & 70 \tiny{ - 35 = 35} \endgraf \tiny{35 - 35 = 0} & \\
+					\hline
+					$S_{2}$ & \endgraf \qquad\qquad 11 & \emoji{cross-mark} \endgraf \qquad\qquad 5 &  \cellcolor{gray} \textbf{\emph{50}} \endgraf \qquad\qquad 2 & \emoji{cross-mark} \endgraf \qquad\qquad 8 & 55 \tiny{ - 50 = 5} & 11 \\
+					\hline
+					$S_{3}$ & \cellcolor{gray} \textbf{\emph{60}} \endgraf \qquad\qquad 10 & \emoji{cross-mark} \endgraf \qquad\qquad 12 & \emoji{cross-mark} \endgraf \qquad\qquad 4 & \cellcolor{gray} \textbf{\emph{10}} \endgraf \qquad\qquad 7 & 70 \tiny{ - 10 = 60} \endgraf \tiny{60 - 60 = 0} & 10\\
+					\hline
+					$S_{4}$ & \cellcolor{gray} \textbf{\emph{20}} \endgraf \qquad\qquad  0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & 20 \tiny{ - 20 = 0} & \\
+					\hline
+					Demand & 85 \tiny{ - 20 = 65} \endgraf \tiny{65 - 60 = 5} & 35 \tiny{ - 35 = 0} \emoji{check-mark-button} & 50 \tiny{ - 50 = 0} \emoji{check-mark-button} & 45 \tiny{ - 35 = 10} \endgraf \tiny{10 - 10 = 0} \emoji{check-mark-button} & &\\
+					\hline
+					\rowcolor{Gray}
+					penalty & 11 - 10 = 1 & & & & & max = 11 \endgraf \qquad LC = 10\\
+					\hline
+
+				\end{tabular}
+			\end{center}
+
+
+	\paragraph{Calculating the next penalty cost for each row and column in the table above}
+
+			\begin{center}
+				\begin{tabular}{ |m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|g| }
+
+					\hline
+					& \multicolumn{4}{|c|}{\textbf{Destination}} & & \\
+					\hline
+
+					Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply & Penalty\\
+					\hline
+
+					$S_{1}$ & \emoji{cross-mark} \endgraf \qquad\qquad 6 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 1 & \emoji{cross-mark} \endgraf \qquad\qquad 9 & \cellcolor{gray} \textbf{\emph{35}} \endgraf \qquad\qquad 3 & 70 \tiny{ - 35 = 35} \endgraf \tiny{35 - 35 = 0} & \\
+					\hline
+					$S_{2}$ & \cellcolor{gray} \textbf{\emph{5}} \endgraf \qquad\qquad 11 & \emoji{cross-mark} \endgraf \qquad\qquad 5 &  \cellcolor{gray} \textbf{\emph{50}} \endgraf \qquad\qquad 2 & \emoji{cross-mark} \endgraf \qquad\qquad 8 & 55 \tiny{ - 50 = 5} \endgraf \tiny{5 - 5 = 0} & 11 \\
+					\hline
+					$S_{3}$ & \cellcolor{gray} \textbf{\emph{60}} \endgraf \qquad\qquad 10 & \emoji{cross-mark} \endgraf \qquad\qquad 12 & \emoji{cross-mark} \endgraf \qquad\qquad 4 & \cellcolor{gray} \textbf{\emph{10}} \endgraf \qquad\qquad 7 & 70 \tiny{ - 10 = 60} \endgraf \tiny{60 - 60 = 0} & \\
+					\hline
+					$S_{4}$ & \cellcolor{gray} \textbf{\emph{20}} \endgraf \qquad\qquad  0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & \emoji{cross-mark} \endgraf \qquad\qquad 0 & 20 \tiny{ - 20 = 0} & \\
+					\hline
+					Demand & 85 \tiny{ - 20 = 65} \endgraf \tiny{65 - 60 = 5} \endgraf \tiny{5 - 5 = 0} \emoji{check-mark-button} & 35 \tiny{ - 35 = 0} \emoji{check-mark-button} & 50 \tiny{ - 50 = 0} \emoji{check-mark-button} & 45 \tiny{ - 35 = 10} \endgraf \tiny{10 - 10 = 0} \emoji{check-mark-button} & &\\
+					\hline
+					\rowcolor{Gray}
+					penalty & 11 & & & & & max = 11 \endgraf \qquad LC = 11\\
+					\hline
+
+				\end{tabular}
+			\end{center}
+
+
+
+		\vspace{70px}
+			Finally, the Initial Basic Feasible Solution Table to the TP problem using the Vogel's Method is
+
+			\begin{center}
+				\begin{tabular}{ |m{5em}|m{5em}|m{5em}|m{5em}|m{5em}|m{5em}| }
+
+					\hline
+					& \multicolumn{4}{|c|}{\textbf{Destination}} & \\
+					\hline
+
+					Source & $D_{1}$ & $D_{2}$ & $D_{3}$ & $D_{4}$ & Supply\\
+					\hline
+					$S_{1}$ & \endgraf \qquad\qquad 6 & \textbf{\emph{35}} \endgraf \qquad\qquad 1 & \endgraf \qquad\qquad 9 & \textbf{\emph{35}} \endgraf \qquad\qquad 3 & 70\\
+					\hline
+					$S_{2}$ & \textbf{\emph{5}} \endgraf \qquad\qquad 11 & \endgraf \qquad\qquad 5 & \textbf{\emph{50}} \endgraf \qquad\qquad 2 & \endgraf \qquad\qquad 8 & 55\\
+					\hline
+					$S_{3}$& \textbf{\emph{60}} \endgraf \qquad\qquad 10 & \endgraf \qquad\qquad 12 & \endgraf \qquad\qquad 4 & \textbf{\emph{10}} \endgraf \qquad\qquad 7 & 70\\
+					\hline
+					$S_{4}$& \textbf{\emph{20}} \endgraf \qquad\qquad 0 & \endgraf \qquad\qquad 0 & \endgraf \qquad\qquad 0 & \endgraf \qquad\qquad 0 & 20\\
+					\hline
+					Demand & 85 & 35 & 50 & 45 & \\
+					\hline
+
+				\end{tabular}
+			\end{center}
+
+
+		The Total cost = $(35 \times 1) + (35 \times 3) + (5 \times 11) + (50 \times 2) + (60 \times 10) + (10 \times 7) + (20 \times 0) = 35 + 105 + 55 + 100 + 600 + 70 + 0 $ \\
+			\begin{center}
+			$ = \textnaira {\Large 965}$
+			\end{center}
+
+
+\end{document}
