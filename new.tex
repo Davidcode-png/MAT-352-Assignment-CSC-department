@@ -10,10 +10,9 @@
 
 \maketitle
 
-\section{Questions}
 
+\section*{Question}
 \begin{enumerate}
-    \item Provide the Inclusion-Exclusion Proof by Mathematical Induction
     \item Prove that
         \begin{enumerate}[label=(\alph*)]
             \item $0 \leq P(E) \leq 1$
@@ -24,8 +23,51 @@
 
 
 
+\newpage
 
-\end{document}
+\section*{a. Prove that $0 \leq P(E) \leq 1$}
+
+\textbf{Proof:}
+
+Remember that:
+\begin{itemize}
+    \item \textbf{Axiom 1:} $P(A) \geq 0$
+    \item \textbf{Axiom 2:} $P(S) = 1$
+\end{itemize}
+
+Note that by Axiom 1, $P(A) \geq 0$.
+
+Let $S$ be the sample space, and let $A$ be any event.\\
+Then $S = A \cup (S \setminus A)$, where $(S \setminus A)$ means everything in $S$ but not in $A$.
+\\
+\\
+\textbf{NB:} $P(A) + P(S \setminus A)$ means $A$ and $(S \setminus A)$ are mutually exclusive.
+\\
+\\
+
+\textbf{By Axiom 1:} $P(A) > 0$ \\ \\
+$P(A) + P(S \setminus A) \geq P(A) + 0$
+\\ \\
+$P(S) \geq P(A) + P(S \setminus A)$
+\\ \\
+$P(S) \geq P(A)$
+\\ \\
+\textbf{NB:} $P(S) = 1$ \text{ i.e Axiom 2 {probability of simple space= 1}}
+\\ \\
+Thus, $P(S) \geq P(A)$
+\\ \\ 
+$I > P(A)$ 
+\\ \\
+$P(A) \leq 1$
+\\ \\ 
+Thus, since Axiom 1: $P(A) \geq 0$ 
+\\ \\
+And by Axiom 2: $P(A) \leq 1$ 
+\\ \\
+Therefore $0 \leq P(A) \leq I$\\
+
+
+
 
 
 
