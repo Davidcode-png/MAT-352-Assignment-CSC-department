@@ -1,6 +1,8 @@
 \documentclass{article}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{enumitem}
+\usepackage{float}
+
 
 \title{MAT 352 Assignment}
 \author{Computer Science Department}
@@ -67,8 +69,53 @@ And by Axiom 2: $P(A) \leq 1$
 \\ \\
 Therefore $0 \leq P(A) \leq I$\\
 
+\newpage
+\section*{b. Prove that $P[(A \cap B) \cup (A \cap C) \cup (B \cap C)] = P(A \cap B) + P(A \cap C) + P(B \cap C) - 2P(A \cap B \cap C)$}
+
+Since $(A \cup B \cup C) = P(A) + P(B) + P(C) - P(A \cap B) - P(A \cap C) - P(B \cap C) + P(A \cap B \cap C)$
+\\ \\
+Then
+\\ \\ 
+$P((A \cap B) \cup (A \cap C) \cup (B \cap C)) = P(A \cap B) + P(A \cap C) + P(B \cap C) - P((A \cap B) \cap (A \cap C)) - P((A \cap B) \cap (B \cap C)) - P(A \cap C \cap B \cap C) + P((A \cap B) \cap (A \cap C) \cap (B \cap C))$
+\\ \\
+
+Recall
+\\ \\ 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{latexvenn.png}
+    \caption{Venn Diagram}
+    \label{fig:my_label}
+\end{figure}
 
 
+
+
+{instead of labeling the shaded area, you can do the below!}
+
+{Let the shaded area be } T
+
+{From the Venn diagram, it can be seen that}
+
+\begin{itemize}
+    \item $(A \cap B) \cap (A \cap C) = T$
+    \item $(B \cap B) \cap (B \cap C) = T$
+    \item $(A \cap C) \cap (B \cap C) = T$
+    \item $(A \cap B \cap C) = T$
+\end{itemize}
+
+{Therefore,}
+
+$(A \cap B) \cap (A \cap C) = (A \cap B) \cap (B \cap C)
+= (A \cap C) \cap (B \cap C) = A \cap B \cap C$
+
+
+
+$= P(A \cap B) + P(A \cap C) + P(B \cap C) - P(A \cap B \cap C) - P(A \cap B \cap C) - P(A \cap B \cap C) + P(A \cap B \cap C)$
+\\ \\
+$= P(A \cap B) + P(A \cap C) + P(B \cap C) - 2P(A \cap B \cap C)$
+\\ \\
 
 
 
