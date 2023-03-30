@@ -1,0 +1,357 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1.0in]{geometry}
+\usepackage{amsmath}
+\usepackage[table]{xcolor}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage[auto-lang=false]{lipsum}
+\usepackage{booktabs}
+
+\setlength{\arrayrulewidth}{0.5mm}
+\setlength{\tabcolsep}{18pt}
+\renewcommand{\arraystretch}{1.5}
+
+\begin{document}
+
+    \begin{titlepage}
+
+        \begin{center}
+            \vspace*{1cm}
+
+            \Huge
+            \textbf{MAT 352 Assignment}
+
+            \vspace{1.5cm}
+
+            \textbf{Computer Science Department}
+
+            \vspace{2cm}
+            \normalsize
+            \raggedright{
+                \section*{Question:}
+                Proof of the Inclusion-Exclusion Rule
+            }
+
+            \vspace{5cm}
+            \centering
+            Submitted to Dr.\ Adinya
+
+            \vspace{1cm}
+            \today
+        \end{center}
+
+    \end{titlepage}
+
+    \pagenumbering{arabic}
+	\pagestyle{fancy}
+	\fancyhead{}
+	\fancyhead[L]{\textbf{MAT 352 Assignment}}
+	\fancyhead[R]{\textbf{Computer Science}}
+
+    \section*{Name of Students}
+    \begin{center}
+        \rowcolors{4}{gray}{lightgray}
+        \Large
+        \begin{longtable} { c|l|c }
+            \toprule[2pt]
+            S/N & \multicolumn{1}{|c|}{Name} & Matric Number \\
+            \midrule
+            1 & Adebowale Joseph Akintomiwa & 214846\\
+            2 & Adedapo Anjorin & 214864\\
+            3 & Adegbola Olatunde Williams & 207186\\
+            4 & Adeleke Sherifdeen Adeboye & 214848\\
+            5 & Adeleke Timothy Toluwani & 214849\\
+            6 & Adelowo Samuel Damilare & 214850\\
+            7 & Adeoti Warith Adetayo & 214851\\
+            8 & Adim Chimaobi Solomon & 222455\\
+            9 & Adisa Inioluwa Christiana & 214853\\
+            10 & Ahmad Animasaun & 214863\\
+            11 & Ajayi Prince Ayokunle & 215221\\
+            12 & Akinade Faith Eniola & 222459\\
+            13 & Akinrinola Akinfolarin & 205526\\
+            14 & Akinrinola, Blessing Opemipo & 214857\\
+            15 & Akinwusi Ifeoluwa & 214858\\
+            16 & Alao Tawakalit Omowunmi & 222461\\
+            17 & Alatise Oluwaseun Abraham & 214860\\
+            18 & Arowolo Ayomide Stephen & 214865\\
+            19 & Brai Daniel & 214868\\
+            20 & Chinedu Promise Okafor & 213930\\
+            21 & Daniel Emmanuel Oghenetega & 224870\\
+            22 & Denedo Oghenetega & 214873\\
+            23 & Emiade James & 214874\\
+            24 & Farayola Joshua Olatunde & 214878\\
+            25 & Godwin Daniel & 214871\\
+            26 & Ibraheem Nuh Babatunde & 214879\\
+            27 & Ikwuegbu Michael & 214881\\
+            28 & Kareem Mustapha Babatunde & 214883\\
+            29 & Kayode Peter Temitope & 208077\\
+            30 & Kehinde Boluwatife Soyoye & 214916\\
+            31 & Kip Charles Okechukwu Emeka & 215061\\
+            32 & Matric  & Number\\
+            33 & Kubiat Laura & 214884\\
+            34 & Lawal Uchechukwu Adebayo & 214885\\
+            35 & Matthews Victoria Olayide & 214886\\
+            36 & Nwatu Chidinma Augustina & 214890\\
+            37 & Odulate Oluwatobi Gabriel & 214893\\
+            38 & Ogbolu Precious Chiamaka & 214894\\
+            39 & Oghie Daniel O. & 214895\\
+            40 & Ogunesan Rhoda Oluwatosin & 214897\\
+            41 & Ogunyemi Temidayo Samuel & 214898\\
+            42 & Ojewale Opeoluwa David & 214899\\
+            43 & Okafor Lisa Chisom & 214901\\
+            44 & Okoro Joshua Akachukwu & 214902\\
+            45 & Okumagba Oghenerukevwe Miracle & 222498\\
+            46 & Olagidi Joshua & 222500\\
+            47 & Olalere Khadijat Titilayo & 222502\\
+            48 & Olatunji Michael Oluwayemi & 214903\\
+            49 & Olawale Eniola Emmanuel & 214904\\
+            50 & Olorogun Ebikabowei Caleb & 214906\\
+            51 & Oluwatade Iyanuoluwa & 214907\\
+            52 & Oluwayelu Oluwanifise & 215257\\
+            53 & Onasoga Oluwapelumi Idris & 214909\\
+            54 & Oyekanmi Eniola & 214913\\
+            55 & Sadiq Peter & 214914\\
+            56 & Salami Lateefat Abimbola & 214915\\
+            57 & Stephen Chidiebere Ivuelekwa & 214882\\
+            58 & Toluwanimi Oluwabukunmi Osuolale & 214912\\
+            59 & Ubaka Amazing-Grace Onyiyechukwu & 214918\\
+            60 & Uchechukwu Ahunanya & 214854\\
+            61 & Wisdom Oyor & 215206\\
+            \bottomrule[4pt]
+        \end{longtable}
+        \normalsize
+    \end{center}
+
+    \newpage
+    \section*{Proof of the Inclusion-Exclusion Rule}
+    The Inclusion-Exclusion States that:
+
+    \begin{equation} \label{i_e_rule}
+        \begin{split}
+            P(E_1 \cup E_2 \cup E_3 \cup \dots \cup E_n) = & \sum_{i = 1}^{n} P(E_i) - \sum_{i_1 < i_2} P(E_{i_1} \cap E_{i_2}) + \sum_{i_1 < i_2 < i_3} P(E_{i_1} \cap E_{i_2} \cap E_{i_3}) + \cdots + \\
+            & {(-1)}^{r + 1} \sum_{i_1 < i_2 < \cdots < i_r} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_r}) + \cdots + \\
+            & {(-1)}^{n} \sum_{i_1 < i_2 < \cdots < i_{n-1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{n-1}}) + \\
+            & {(-1)}^{n + 1} P(E_1 \cap E_2 \cap E_3 \cap \cdots \cap E_n)
+        \end{split}
+    \end{equation}
+
+    where the summation ${(-1)}^{r + 1} \sum_{i_1 < i_2 < \cdots < i_r} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_r})$ is taken over all the $\binom{n}{r}$ possible combinations.
+
+    \subsection*{Proof by Principle of Mathematical Induction}
+
+    Proof by PMI involves two steps,the \textbf{Basic Step} where the rule shown for the base value/unit and the \textbf{Inductive step} which also involve two steps:
+    \begin{enumerate}
+        \item {Making an assumption that the rule/relation holds for an arbitrary value $n = k$}
+        \item {Using this assumption to prove that the rule/relation holds for the ${(n = k + 1)}^{th}$ value.}
+    \end{enumerate}
+
+    \subsection{The Basic Step}
+    For the Induction-Exclusion Rule, the most basic value (base case) is when the number of events is $2$ (i.e $n = 2$), therefore, the rule is applied as:
+    \begin{equation} \label{base_case}
+        P(E_1 \cup E_2) = P(E_1) + P(E_2) - P(E_1 \cap E_2)
+    \end{equation}
+    \subsection{The Inductive Step}
+    \subsubsection*{The assumption that it the rule holds for some $n = k$}
+    It is assumed that the rule/relation holds for a $n = k$ number of events. Therefore the equation below is noted.
+
+    \begin{equation} \label{kth_rule}
+        \begin{split}
+            P(E_1 \cup E_2 \cup E_3 \cup \dots \cup E_k) = & \sum_{i = 1}^{k} P(E_i) - \sum_{i_1 < i_2} P(E_{i_1} \cap E_{i_2}) + \sum_{i_1 < i_2 < i_3} P(E_{i_1} \cap E_{i_2} \cap E_{i_3}) + \cdots + \\
+            & {(-1)}^{r + 1} \sum_{i_1 < i_2 < \cdots < i_r} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_r}) + \cdots + \\
+            & {(-1)}^{k} \sum_{i_1 < i_2 < \cdots < i_{k-1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{k-1}}) + \\
+            & {(-1)}^{k + 1} P(E_1 \cap E_2 \cap E_3 \cap \cdots \cap E_k)
+        \end{split}
+    \end{equation}
+
+    \subsubsection*{The proof that the rule holds for $n = k + 1$}
+    Now, the rule is also applied for $n = k + 1$ number of events:
+    \begin{equation} \label{kplus_oneth_rule}
+        \begin{split}
+            P(E_1 \cup E_2 \cup E_3 \cup \dots \cup E_k \cup E_{k + 1}) = & \sum_{i = 1}^{k + 1} P(E_i) - \sum_{i_1 < i_2} P(E_{i_1} \cap E_{i_2}) + \sum_{i_1 < i_2 < i_3} P(E_{i_1} \cap E_{i_2} \cap E_{i_3}) \\
+            & + \cdots + {(-1)}^{r + 1} \sum_{i_1 < i_2 < \cdots < i_r} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_r}) \\
+            & + \cdots + {(-1)}^{k + 1} \sum_{i_1 < i_2 < \cdots < i_{k}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_k}) \\
+            & + {(-1)}^{k + 2} P(E_1 \cap E_2 \cap E_3 \cap \cdots \cap E_k \cap E_{k + 1})
+        \end{split}
+    \end{equation}
+
+    Consider that $P(E_1 \cup E_2 \cup E_3 \cup \dots \cup E_k \cup E_{k + 1})$ can be written as $P([E_1 \cup E_2 \cup E_3 \cup \dots \cup E_k] \cup E_{k + 1})$ wherer by $``E_1 \cup E_2 \cup E_3 \cup \dots \cup E_k``$ is taken as a single event.
+    \begin{equation} \label{split_to_base}
+        \begin{split}
+            P(E_1 \cup E_2 \cup E_3 \cup \dots \cup E_k \cup E_{k + 1}) = P([E_1 \cup E_2 \cup E_3 \cup \dots \cup E_k] \cup E_{k + 1})
+        \end{split}
+    \end{equation}
+
+    By applying the Base Relation of the Inclusion-Exclusion Rule as in equation (\ref{base_case}) to the RHS of the equation (\ref{split_to_base}) above and comparing with equation (\ref{kplus_oneth_rule}) the rule/relation can be proven.
+
+    \paragraph*{}So now:
+
+    \begin{equation} \label{base_kplus_one}
+        \begin{split}
+            P([E_1 \cup E_2 \cup E_3 \cup \dots \cup E_k] \cup E_{k + 1}) = & P(E_1 \cup E_2 \cup E_3 \cup \dots \cup E_k) + P(E_{k + 1}) \\
+            & - P([E_1 \cup E_2 \cup E_3 \cup \dots \cup E_k] \cap E_{k + 1})
+        \end{split}
+    \end{equation}
+
+    The last term in equation (\ref{base_kplus_one}) above can be expanded  as:
+
+    \begin{equation} \label{equ_l}
+        \begin{split}
+            P([E_1 \cup E_2 \cup E_3 \cup \dots \cup E_k] \cap E_{k + 1}) = P([E_1 \cap E_{k + 1}] \cup [E_2 \cap E_{k + 1}] \cup \cdots \cup [E_k \cap E_{k + 1}])
+        \end{split}
+    \end{equation}
+
+    The RHS of equation (\ref{equ_l}) above can be further simplified by applying the Inclusion-Exclusion here again
+    noting that $|P([E_1 \cap E_{k + 1}] \cup [E_2 \cap E_{k + 1}] \cup \cdots \cup [E_k \cap E_{k + 1}])| = k$
+
+    \begin{equation} \label{equ_o}
+        \begin{split}
+            P([E_1 \cap E_{k + 1}] &\cup [E_2 \cap E_{k + 1}] \cup \cdots \cup [E_k \cap E_{k + 1}]) = \sum_{i = 1}^{k} P(E_i \cap E_{k + 1}) \\
+            & - \sum_{i_1 < i_2} P([E_{i_1} \cap E_{k + 1}] \cap [E_{i_2} \cap E_{k + 1}]) \\
+            & + \cdots + {(-1)}^{r} \sum_{i_1 < i_2 \cdots i_{r - 1}} P([E_{i_1} \cap E_{k + 1}] \cap [E_{i_2} \cap E_{k + 1}] \cap \cdots \cap [E_{i_{r - 1}} \cap E_{k + 1}]) \\
+            & + \cdots + {(-1)}^{k} \sum_{i_1 < i_2 \cdots i_{k - 1}} P([E_{i_1} \cap E_{k + 1}] \cap [E_{i_2} \cap E_{k + 1}] \cap \cdots \cap [E_{i_{k - 1}} \cap E_{k + 1}]) \\
+            & + {(-1)}^{k + 1} P([E_1 \cap E_{k + 1}] \cap [E_2 \cap E_{k + 1}] \cap \cdots \cap [E_k \cap E_{k + 1}])
+        \end{split}
+    \end{equation}
+
+    From Set Theory:
+    \begin{equation*}
+        \begin{split}
+            (A \cap B) \cap C = & A \cap B \cap C \\
+            (A \cap B) \cap (A \cap C) = & A \cap B \cap C
+        \end{split}
+    \end{equation*}
+
+    Some term in equation (\ref{equ_o}) can be rewritten as:
+
+    \begin{equation*}
+        \begin{split}
+            &P([E_{i_1} \cap E_{k + 1}] \cap [E_{i_2} \cap E_{k + 1}]) = P(E_{i_1} \cap E_{i_2} \cap E_{k + 1}) \\
+            &P([E_{i_1} \cap E_{k + 1}] \cap [E_{i_2} \cap E_{k + 1}] \cap \cdots \cap [E_{i_{r - 1}} \cap E_{k + 1}]) = P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{r - 1}} \cap E_{k + 1}) \\
+            &P([E_{i_1} \cap E_{k + 1}] \cap [E_{i_2} \cap E_{k + 1}] \cap \cdots \cap [E_{i_{k - 1}} \cap E_{k + 1}]) = P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{k - 1}} \cap E_{k + 1}) \\
+            &P([E_1 \cap E_{k + 1}] \cap [E_2 \cap E_{k + 1}] \cap \cdots \cap [E_k \cap E_{k + 1}]) = P(E_1 \cap E_2 \cap \cdots \cap E_k \cap E_{k + 1})
+        \end{split}
+    \end{equation*}
+
+    Therefore equation (\ref{equ_o}) is simplified as:
+
+    \begin{equation} \label{equ_p}
+        \begin{split}
+            P([E_1 \cap E_{k + 1}] &\cup [E_2 \cap E_{k + 1}] \cup \cdots \cup [E_k \cap E_{k + 1}]) = \sum_{i = 1}^{k} P(E_i \cap E_{k + 1}) \\
+            & - \sum_{i_1 < i_2} P(E_{i_1} \cap E_{i_2} \cap E_{k + 1}) \\
+            & + \cdots + {(-1)}^{r} \sum_{i_1 < i_2 \cdots i_{r - 1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{r - 1}} \cap E_{k + 1}) \\
+            & + \cdots + {(-1)}^{k} \sum_{i_1 < i_2 \cdots i_{k - 1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{k - 1}} \cap E_{k + 1}) \\
+            & + {(-1)}^{k + 1} P(E_1 \cap E_2 \cap \cdots \cap E_k \cap E_{k + 1})
+        \end{split}
+    \end{equation}
+
+    By substituting equation (\ref{kth_rule}) and above equation (\ref{equ_p}) and in equation (\ref{base_kplus_one}), equation (\ref{base_kplus_one}) is then evaluated as:
+
+    \begin{align}
+        \begin{split}
+            P([E_1 \cup E_2 &\cup E_3 \cup \dots \cup E_k] \cup E_{k + 1}) \\
+            = & P(E_1 \cup E_2 \cup E_3 \cup \dots \cup E_k) + P(E_{k + 1}) - P([E_1 \cup E_2 \cup E_3 \cup \dots \cup E_k] \cap E_{k + 1})
+        \end{split} \\
+        \begin{split}
+            = & \sum_{i = 1}^{k} P(E_i) - \sum_{i_1 < i_2} P(E_{i_1} \cap E_{i_2}) + \sum_{i_1 < i_2 < i_3} P(E_{i_1} \cap E_{i_2} \cap E_{i_3}) + \cdots + \\
+            & {(-1)}^{r + 1} \sum_{i_1 < i_2 < \cdots < i_r} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_r}) + \cdots + \\
+            & {(-1)}^{k} \sum_{i_1 < i_2 < \cdots < i_{k-1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{k-1}}) + \\
+            & {(-1)}^{k + 1} P(E_1 \cap E_2 \cap E_3 \cap \cdots \cap E_k) + P(E_{k + 1}) \\
+            & - \left[ \sum_{i = 1}^{k} P(E_i \cap E_{k + 1}) - \sum_{i_1 < i_2} P(E_{i_1} \cap E_{i_2} \cap E_{k + 1}) \right. \\
+            & \left. + \cdots + {(-1)}^{r} \sum_{i_1 < i_2 \cdots i_{r - 1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{r - 1}} \cap E_{k + 1}) \right. \\
+            & \left. + \cdots + {(-1)}^{k} \sum_{i_1 < i_2 \cdots i_{k - 1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{k - 1}} \cap E_{k + 1}) \right. \\
+            & \left. + {(-1)}^{k + 1} P(E_1 \cap E_2 \cap \cdots \cap E_k \cap E_{k + 1}) \right] \\
+        \end{split}
+    \end{align}
+    Note that the term ``${(-1)}^{k} \sum_{i_1 < i_2 < \cdots < i_{k-1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{k-1}})$`` can be contained in the terms ``${(-1)}^{r + 1} \sum_{i_1 < i_2 < \cdots < i_r} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_r}) + \cdots +$`` and therefore may be ignored. The equation is then reduced to:
+
+    \begin{align}
+        \begin{split} \label{reduced_term}
+            P([E_1 \cup E_2 &\cup E_3 \cup \dots \cup E_k] \cup E_{k + 1}) \\
+            = & \sum_{i = 1}^{k} P(E_i) - \sum_{i_1 < i_2} P(E_{i_1} \cap E_{i_2}) + \sum_{i_1 < i_2 < i_3} P(E_{i_1} \cap E_{i_2} \cap E_{i_3}) + \cdots + \\
+            & {(-1)}^{r + 1} \sum_{i_1 < i_2 < \cdots < i_r} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_r}) + \cdots + \\
+            & {(-1)}^{k + 1} P(E_1 \cap E_2 \cap E_3 \cap \cdots \cap E_k) + P(E_{k + 1}) \\
+            & - \left[ \sum_{i = 1}^{k} P(E_i \cap E_{k + 1}) - \sum_{i_1 < i_2} P(E_{i_1} \cap E_{i_2} \cap E_{k + 1}) \right. \\
+            & \left. + \cdots + {(-1)}^{r} \sum_{i_1 < i_2 \cdots i_{r - 1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{r - 1}} \cap E_{k + 1}) \right. \\
+            & \left. + \cdots + {(-1)}^{k} \sum_{i_1 < i_2 \cdots i_{k - 1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{k - 1}} \cap E_{k + 1}) \right. \\
+            & \left. + {(-1)}^{k + 1} P(E_1 \cap E_2 \cap \cdots \cap E_k \cap E_{k + 1}) \right] \\
+        \end{split}
+    \end{align}
+
+    Expand the bracket in eqation (\ref{reduced_term}) above and distribute the negative sign noting that $-1 \times {(-1)}^{a + 1} = {(-1)}^{a + 2}$
+
+    \begin{align}
+        \begin{split} \label{expanded_term}
+            P([E_1 \cup E_2 &\cup E_3 \cup \dots \cup E_k] \cup E_{k + 1}) \\
+            = & \sum_{i = 1}^{k} P(E_i) - \sum_{i_1 < i_2} P(E_{i_1} \cap E_{i_2}) + \sum_{i_1 < i_2 < i_3} P(E_{i_1} \cap E_{i_2} \cap E_{i_3}) + \cdots + \\
+            & {(-1)}^{r + 1} \sum_{i_1 < i_2 < \cdots < i_r} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_r}) + \cdots + \\
+            & {(-1)}^{k + 1} P(E_1 \cap E_2 \cap E_3 \cap \cdots \cap E_k) + P(E_{k + 1}) \\
+            & - \sum_{i = 1}^{k} P(E_i \cap E_{k + 1}) + \sum_{i_1 < i_2} P(E_{i_1} \cap E_{i_2} \cap E_{k + 1}) \\
+            & + \cdots + {(-1)}^{r + 1} \sum_{i_1 < i_2 \cdots i_{r - 1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{r - 1}} \cap E_{k + 1}) \\
+            & + \cdots + {(-1)}^{k + 1} \sum_{i_1 < i_2 \cdots i_{k - 1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{k - 1}} \cap E_{k + 1}) \\
+            & + {(-1)}^{k + 2} P(E_1 \cap E_2 \cap \cdots \cap E_k \cap E_{k + 1}) \\
+        \end{split}
+    \end{align}
+
+    Collecting like terms:
+
+    \begin{align}
+        \begin{split} \label{grouped_term}
+            P([E_1 \cup E_2 &\cup E_3 \cup \dots \cup E_k] \cup E_{k + 1}) \\
+            = & \sum_{i = 1}^{k} P(E_i) + P(E_{k + 1}) \\
+            & - \sum_{i_1 < i_2} P(E_{i_1} \cap E_{i_2}) - \sum_{i = 1}^{k} P(E_i \cap E_{k + 1}) \\
+            & + \sum_{i_1 < i_2 < i_3} P(E_{i_1} \cap E_{i_2} \cap E_{i_3}) + \sum_{i_1 < i_2} P(E_{i_1} \cap E_{i_2} \cap E_{k + 1}) + \cdots + \\
+            & {(-1)}^{r + 1} \sum_{i_1 < i_2 < \cdots < i_r} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_r}) + \\
+            & {(-1)}^{r + 1} \sum_{i_1 < i_2 \cdots i_{r - 1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{r - 1}} \cap E_{k + 1}) + \cdots + \\
+            & {(-1)}^{k + 1} P(E_1 \cap E_2 \cap E_3 \cap \cdots \cap E_k) + \\
+            & {(-1)}^{k + 1} \sum_{i_1 < i_2 \cdots i_{k - 1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{k - 1}} \cap E_{k + 1}) + \\
+            & {(-1)}^{k + 2} P(E_1 \cap E_2 \cap \cdots \cap E_k \cap E_{k + 1}) \\
+        \end{split}
+    \end{align}
+
+    Considering the collected like terms in equation (\ref{grouped_term}) above, the terms can be collapsed as follows (including summation bounds):
+
+    \begin{align} \label{collapsed_term1}
+        \sum_{i = 1}^{k} P(E_i) + P(E_{k + 1}) &= \sum_{i = 1}^{k + 1} P(E_i) \\
+        \sum_{1 \le i_1 < i_2 \le k} P(E_{i_1} \cap E_{i_2}) + \sum_{i = 1}^{k} P(E_i \cap E_{k + 1}) &= \sum_{1 \le i_1 < i_2 \le {k + 1}} P(E_{i_1} \cap E_{i_2}) \\
+        \sum_{1 \le i_1 < i_2 < i_3 \le k} P(E_{i_1} \cap E_{i_2} \cap E_{i_3}) + \sum_{1 \le i_1 < i_2 \le k} P(E_i \cap E_{k + 1}) &= \sum_{1 \le i_1 < i_2 < i_3 \le {k + 1}} P(E_{i_1} \cap E_{i_2} \cap E_{i_3})
+    \end{align}
+
+    \begin{multline} \label{collapsed_term2}
+        \sum_{1 \le i_1 < i_2 < \cdots < i_{r \le k} \le k} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_r}) + \sum_{1 \le i_1 < i_2 \cdots i_{r - 1 \le k} \le k} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{r - 1}} \cap E_{k + 1}) \\
+        = \sum_{1 \le i_1 < i_2 \cdots i_{r \le {k + 1}} \le {k + 1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_r})
+    \end{multline}
+
+    \begin{multline} \label{collapsed_term3}
+        P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_k}) + \sum_{i_1 < i_2 \cdots i_{k - 1} \le k} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{k - 1}} \cap E_{k + 1}) \\
+        = \sum_{i_1 < i_2 \cdots < i_k \le {k + 1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_k})
+    \end{multline}
+
+    Substituting the collapsed equations (\ref{collapsed_term1}) to (\ref{collapsed_term3}) in equation (\ref{grouped_term}):
+
+    \begin{align}
+        \begin{split} \label{final_eq}
+            P([E_1 \cup E_2 \cup E_3 \cup \dots \cup E_k] \cup E_{k + 1}) = & \sum_{i = 1}^{k + 1} P(E_i) - \sum_{1 \le i_1 < i_2 \le {k + 1}} P(E_{i_1} \cap E_{i_2}) \\
+            & + \sum_{1 \le i_1 < i_2 < i_3 \le {k + 1}} P(E_{i_1} \cap E_{i_2} \cap E_{i_3}) \\
+            & + \cdots + {(-1)}^{r + 1} \sum_{1 \le i_1 < i_2 \cdots i_{r \le {k + 1}} \le {k + 1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_r}) \\
+            & + \cdots + {(-1)}^{k + 1} \sum_{i_1 < i_2 \cdots < i_k \le {k + 1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_k}) \\
+            & + {(-1)}^{k + 2} P(E_1 \cap E_2 \cap \cdots \cap E_k \cap E_{k + 1}) \\
+        \end{split}
+    \end{align}
+
+    Equation (\ref{final_eq}) above is equivalent to equation (\ref{kplus_oneth_rule}) (for the $n = k + 1$ number of events) and this concludes the proof for the Inclusion-Exclusion Rule.
+
+    \subsection*{Closing Statement}
+    With the proof shown above, it can be said that for any $n$ number of events, the Inclusion-Exclusion Rule:
+    \begin{equation*}
+        \begin{split}
+            P(E_1 \cup E_2 \cup E_3 \cup \dots \cup E_n) = & \sum_{i = 1}^{n} P(E_i) - \sum_{i_1 < i_2} P(E_{i_1} \cap E_{i_2}) + \sum_{i_1 < i_2 < i_3} P(E_{i_1} \cap E_{i_2} \cap E_{i_3}) + \cdots + \\
+            & {(-1)}^{r + 1} \sum_{i_1 < i_2 < \cdots < i_r} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_r}) + \cdots + \\
+            & {(-1)}^{n} \sum_{i_1 < i_2 < \cdots < i_{n-1}} P(E_{i_1} \cap E_{i_2} \cap \cdots \cap E_{i_{n-1}}) + \\
+            & {(-1)}^{n + 1} P(E_1 \cap E_2 \cap E_3 \cap \cdots \cap E_n)
+        \end{split}
+    \end{equation*}
+    is true!!!
+
+
+\end{document}
