@@ -9,5 +9,4 @@
 - P (x = x) = qx−1p where x = 1, 2, . . . and q = 1 − p
 
 
-<p style="text-align: center;"> Computer Science Department UI (2018/2019)</p>
-<p style="text-align: center;">&#169 2023</p>
+<p style="text-align: center;"> &#169 2023 Computer Science Department UI (2018/2019)</p>
