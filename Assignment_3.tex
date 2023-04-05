@@ -1,0 +1,520 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1.0in]{geometry}
+\usepackage{amsmath}
+\usepackage[table]{xcolor}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage[auto-lang=false]{lipsum}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{listings}
+\usepackage{xcolor}
+
+
+\setlength{\arrayrulewidth}{0.5mm}
+\setlength{\tabcolsep}{18pt}
+\renewcommand{\arraystretch}{1.5}
+\definecolor{ashgrey}{rgb}{0.7, 0.75, 0.71}
+\definecolor{cadetgrey}{rgb}{0.57, 0.64, 0.69}
+\graphicspath{ {./Assignment_3_Res/Graphs/} }
+
+\newcommand*{\newincludegraphics}[2][]{
+    \begin{center}
+        \begin{adjustbox}{max size={\textwidth}{\textheight}}
+            \includegraphics[#1]{#2}
+        \end{adjustbox}
+    \end{center}
+}
+
+\newcommand*{\simpleincludegraphics}[2][]{
+    \begin{figure}[h]
+        \centering
+        \includegraphics[#1]{#2}
+    \end{figure}
+}
+
+% \lstset{
+%     basicstyle=\ttfamily,
+%     columns=fullflexible,
+%     frame=single,
+%     breaklines=true,
+%     postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+% }
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+
+\lstset{style=mystyle}
+
+\begin{document}
+
+    \begin{titlepage}
+
+        \begin{center}
+            \vspace*{1cm}
+
+            \Huge
+            \textbf{MAT 352 Assignment --- 3}
+
+            \vspace{1.5cm}
+
+            \textbf{Computer Science Department}
+
+            \vspace{1cm}
+            \Large
+            \raggedright{
+                \section*{Question:}
+                For each of the distributions below:
+                \begin{itemize}
+                    \item \texttt{Discrete Distributions}
+                        \begin{enumerate}
+                            \item{Bernoulli}
+                            \item{Binomial}
+                            \item{Poisson}
+                            \item{Geometric}
+                        \end{enumerate}
+                    \item \texttt{Continuous Distributions}
+                        \begin{enumerate}
+                            \item{Bernoulli}
+                            \item{Binomial}
+                            \item{Poisson}
+                            \item{Geometric}
+                        \end{enumerate}
+                \end{itemize}
+                Give:
+                \begin{itemize}
+                    \item{The key characteristics}
+                    \item{The PDF/PMF, Expected Value and Variance}
+                    \item{Two sample World Problems and}
+                    \item{The graph of the distribution}
+                \end{itemize}
+            }
+
+            \vspace{2cm}
+            \centering
+            \large
+            Submitted to Dr.\ Adinya
+
+            \vspace{1cm}
+            \today
+            \normalsize
+        \end{center}
+
+    \end{titlepage}
+
+    \pagenumbering{arabic}
+	\pagestyle{fancy}
+	\fancyhead{}
+	\fancyhead[L]{\textbf{MAT 352 Assignment}}
+	\fancyhead[R]{\textbf{Computer Science}}
+
+    \section*{Name of Students}
+    \begin{center}
+        \rowcolors{4}{cadetgrey}{lightgray}
+        \Large
+        \begin{longtable} { c|l|c }
+            \toprule[1pt]
+            S/N & \multicolumn{1}{|c|}{Name} & Matric Number \\
+            \midrule
+            1 & Adebowale Joseph Akintomiwa & 214846\\
+            2 & Adedapo Anjorin & 214864\\
+            3 & Adegbola Olatunde Williams & 207186\\
+            4 & Adeleke Sherifdeen Adeboye & 214848\\
+            5 & Adeleke Timothy Toluwani & 214849\\
+            6 & Adelowo Samuel Damilare & 214850\\
+            7 & Adeoti Warith Adetayo & 214851\\
+            8 & Adim Chimaobi Solomon & 222455\\
+            9 & Adisa Inioluwa Christiana & 214853\\
+            10 & Ahmad Animasaun & 214863\\
+            11 & Ajayi Prince Ayokunle & 215221\\
+            12 & Akinade Faith Eniola & 222459\\
+            13 & Akinrinola Akinfolarin & 205526\\
+            14 & Akinrinola, Blessing Opemipo & 214857\\
+            15 & Akinwusi Ifeoluwa & 214858\\
+            16 & Alao Tawakalit Omowunmi & 222461\\
+            17 & Alatise Oluwaseun Abraham & 214860\\
+            18 & Arowolo Ayomide Stephen & 214865\\
+            19 & Brai Daniel & 214868\\
+            20 & Chinedu Promise Okafor & 213930\\
+            21 & Daniel Emmanuel Oghenetega & 224870\\
+            22 & Denedo Oghenetega & 214873\\
+            23 & Emiade James & 214874\\
+            24 & Farayola Joshua Olatunde & 214878\\
+            25 & Godwin Daniel & 214871\\
+            26 & Ibraheem Nuh Babatunde & 214879\\
+            27 & Ikwuegbu Michael & 214881\\
+            28 & Kareem Mustapha Babatunde & 214883\\
+            29 & Kayode Peter Temitope & 208077\\
+            30 & Kehinde Boluwatife Soyoye & 214916\\
+            31 & Kip Charles Okechukwu Emeka & 215061\\
+            32 & Matric  & Number\\
+            33 & Kubiat Laura & 214884\\
+            34 & Lawal Uchechukwu Adebayo & 214885\\
+            35 & Matthews Victoria Olayide & 214886\\
+            36 & Nwatu Chidinma Augustina & 214890\\
+            37 & Odulate Oluwatobi Gabriel & 214893\\
+            38 & Ogbolu Precious Chiamaka & 214894\\
+            39 & Oghie Daniel O. & 214895\\
+            40 & Ogunesan Rhoda Oluwatosin & 214897\\
+            41 & Ogunyemi Temidayo Samuel & 214898\\
+            42 & Ojewale Opeoluwa David & 214899\\
+            43 & Okafor Lisa Chisom & 214901\\
+            44 & Okoro Joshua Akachukwu & 214902\\
+            45 & Okumagba Oghenerukevwe Miracle & 222498\\
+            46 & Olagidi Joshua & 222500\\
+            47 & Olalere Khadijat Titilayo & 222502\\
+            48 & Olatunji Michael Oluwayemi & 214903\\
+            49 & Olawale Eniola Emmanuel & 214904\\
+            50 & Olorogun Ebikabowei Caleb & 214906\\
+            51 & Oluwatade Iyanuoluwa & 214907\\
+            52 & Oluwayelu Oluwanifise & 215257\\
+            53 & Onasoga Oluwapelumi Idris & 214909\\
+            54 & Oyekanmi Eniola & 214913\\
+            55 & Sadiq Peter & 214914\\
+            56 & Salami Lateefat Abimbola & 214915\\
+            57 & Stephen Chidiebere Ivuelekwa & 214882\\
+            58 & Toluwanimi Oluwabukunmi Osuolale & 214912\\
+            59 & Ubaka Amazing-Grace Onyiyechukwu & 214918\\
+            60 & Uchechukwu Ahunanya & 214854\\
+            61 & Wisdom Oyor & 215206\\
+            \bottomrule[4pt]
+        \end{longtable}
+        \normalsize
+    \end{center}
+
+    \newpage
+
+    \section{Discrete Distributions}
+
+    \subsection{Bernoulli Distribution}
+    The Bernoulli distribution is a probability distribution wherein the random variable can only have two possible outcomes: 1 (probability of success) with probability p or 0 (probability of failure) with probability $(1 - p)$. It is a special case of the binomial distribution where a single trial is conducted (so n would be 1 for such a binomial distribution). It is represented as $X \sim Ber(p)$. This distribution's probability mass function, mean, and variance is given below.
+
+    \begin{equation}
+        \label{eq:bernoulli_pmf}
+        f_X(x) = p^{x}{(1-p)}^{1-x}
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:bernoulli_mean}
+        E[X] = p
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:bernoulli_variance}
+        Var[X] = p(1-p)
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:bernoulli_std}
+        Std[X] = \sqrt{p(1-p)}
+    \end{equation}
+
+    \subsubsection*{Sample Word Problems}
+    \begin{enumerate}
+        \item The prevalence of a certain disease in the general population is $10\%$. If we randomly select a person from this population, find the probability that the person is not diseased.
+        \item The standard deviation of a Bernoulli random variable $X$ is $\frac{2}{5}$. Find the Expected value and the variance of $X$.
+    \end{enumerate}
+
+    \subsubsection*{Graph of Bernoulli Distribution}
+    \newincludegraphics[]{(D)-Bernoulli_distribution_visualization}
+
+    \subsection{Binomial Distribution}
+    The binomial distribution is a probability distribution that models the chances of success in a series of events where the only possible outcomes are success and failure.
+    A binomial distribution gives the probability of gaining $x$ successes out of $n$ trials if the probability of success is $p$. It is represented as $X \sim Bin(n, p)$. The probability mass function, mean, variance and standard deviation of this distribution are given below.
+
+    \begin{equation}
+        \label{eq:binomial_pmf}
+        f_X(x) = {n \choose x}p^{x}{(1-p)}^{n-x}
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:binomial_mean}
+        E[X] = np
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:binomial_variance}
+        Var[X] = np(1 - p)
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:binomial_std}
+        Std[X] = \sqrt{np(1 - p)}
+    \end{equation}
+
+    \subsubsection*{Sample Word Problems}
+    \begin{enumerate}
+        \item There are four fused bulbs in a lot of 10 good bulbs. If three bulbs are drawn at random with replacement, find the probability of distribution of the number of fused bulbs drawn.
+        \item Find the probability of obtaining four or more heads in five tosses of a fair coin.
+        \item The probability that a motorcycle will change lanes when making a U-turn is $80\%$. Suppose a random sample of 16 motorcycle are observed making turns at Fordham roadss and jerome avenue intersection. Find the probability that at least one motorcycle will change lanes while making U-turn.
+    \end{enumerate}
+
+    \subsubsection*{Graph of Binomial Distribution}
+    \newincludegraphics[]{(D)-Binomial_distribution_visualization}
+
+    \subsection{Poisson Distribution}
+    This probability distribution models the chances of a certain number of events, $x$, occurring within a time or space frame, given the average rate of occurrence of the event, $\lambda$. It is represented as $X \sim Poisson(\lambda)$.
+
+    \begin{equation}
+        \label{eq:poisson_pmf}
+        f_X(x) = \left\{
+        \begin{array}{ll}
+            \frac{\lambda^{x}e^{-\lambda}}{x!}  & \mbox{for } x = 1, 2, \ldots \\
+            0 & \mbox{elsewhere}
+        \end{array}
+    \right.
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:poisson_mean}
+        E[X] = \lambda
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:poisson_variance}
+        Var[X] = \lambda
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:poisson_std}
+        Std[X] = \sqrt{\lambda}
+    \end{equation}
+
+    \subsubsection*{Sample Word Problems}
+    \begin{enumerate}
+        \item $3$ in every $1000$ H-mobile phones are discovered to have fault. Find the probability that out of $5000$ H-mobile phones, exactly 8 will have fault.
+        \item A manufacturer produces light-bulbs that are packed into boxes of $100$. If quality control studies indicate that $0.5\%$ of the light-bulbs produced are defective, what percentage of the boxes will contain:
+            \begin{enumerate}
+                \item no defective?
+                \item 2 or more defectives?
+            \end{enumerate}
+        \item If $3\%$ of electronic units manufactured by a company are defective. Find the probability that in a sample of 200 units, less than 2 bulbs are defective.
+    \end{enumerate}
+
+    \subsubsection*{Graph of Poisson Distribution}
+    \newincludegraphics[]{(D)-Poisson_distribution_visualization}
+
+    \subsection{Geometric Distribution}
+    A geometric distribution is a probability distribution of a random variable $X$ that satisfies some conditions. The geometric distribution conditions are: A phenomenon that has a series of $n$ trials, Each trial has only two possible outcomes – either success $p$ or failure $q = 1-p$, The probability of success is the same for each trial. This distribution gives the probability of achieving success after N number of failures. It is represented as $X \sim Geometric(p)$. This distribution's probability mass function, mean, and variance is given below.
+
+    \begin{equation}
+        \label{eq:geometric_pmf}
+        f_X(x) = {(1-p)}^{x-1}p
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:geometric_mean}
+        E[X] = 1/p
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:geometric_variance}
+        Var[X] = {(1 - p)} / p^2
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:geometric_std}
+        Std[X] = \sqrt{(1 - p) / p^2}
+    \end{equation}
+
+    \subsubsection*{Sample Word Problems}
+    \begin{enumerate}
+        \item If a patient is waiting for a suitable blood donor and the probability that the selected donor will be a match is $0.2$, then find the expected number of donors who will be tested till a match is found including the matched donor.
+        \item Suppose you are playing a game of darts. The probability of success is $0.4$. What is the probability that you will hit the bullseye on the third try?
+        \item Calculate the probability density of geometric distribution if the value of $p$ is $0.42$; $x = 1, 2, 3, \ldots$, also find out the mean and variance.
+        \item A light bulb manufacturing factory finds $3$ in every $60$ light bulbs defective. Calculate what will be the probability that the first defective light bulb with be found when the $6th$ one is tested?
+    \end{enumerate}
+
+    \subsubsection*{Graph of Geometric Distribution}
+    \newincludegraphics[]{(D)-Geometric_distribution_visualization.png}
+
+
+    \section{Continuous Distributions}
+
+    \subsection{Uniform Distribution}
+    The uniform distribution is a type of probability distribution in which all outcomes are equally likely. It is defined by two parameters, $a$ and $b$, where x = minimum value and y = maximum value. It is generally denoted by $u(a, b)$. A continuous random variable $X$ is said to have a Uniform distribution over the interval $[a,b]$, shown as $X \sim Uniform(a,b)$, if its probability density function is given by
+
+    \begin{equation}
+        \label{eq:uniform_pdf}
+        f_X(x) = \left\{
+        \begin{array}{ll}
+            \frac{1}{b-a}  & a < x < b \\
+            0 & {x < a \mbox{ or } x > b}\\
+        \end{array}
+    \right.
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:uniform_mean}
+        E[X] = \frac{a+b}{2}
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:uniform_variance}
+        Var[X] = \frac{{(b-a)}^2}{12}
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:uniform_std}
+        Std[X] = \sqrt{\frac{{(b-a)}^2}{12}}
+    \end{equation}
+
+    \subsubsection*{Sample Word Problems}
+    \begin{enumerate}
+        \item Bus is uniformly late between $2$ and $10 minutes$.
+            \begin{enumerate}
+                \item How long can you expect to wait?
+                \item with what standard deviation?
+                \item If it is $> 7 mins$, you'll be late for work. What is the probability of being late.
+            \end{enumerate}
+        \item The average weight gained by a person over the winter months is uniformly distributed and ranges from $0$ to $30 lbs$. Find the probability of a person that he will gain between 10 and $15lbs$ in the winter months.
+    \end{enumerate}
+
+    \subsubsection*{Graph of Uniform Distribution}
+    \newincludegraphics[]{(C)-Uniform_distribution_visualization.png}
+
+    \subsection{Normal Distribution}
+    The normal distribution is a probability distribution that models many natural phenomena such as the distribution of a particular feature in a population. It is represented as $X \sim N(\mu, \sigma)$. It is easily recognised by its bell-shaped curve that is centered around the mean and a spread determined by the standard deviation. Its probability distribution function, mean, variance and standard deviation are given below.
+
+    \begin{equation}
+        \label{eq:normal_pdf}
+        f_X(x) = \frac{1}{\sigma\sqrt{2 \pi}}e^{- \frac{1}{2\sigma^2}{(x - \mu)}^2}
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:normal_mean}
+        E[X] = \mu
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:normal_variance}
+        Var[X] = \sigma^2
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:normal_std}
+        Std[X] = \sigma
+    \end{equation}
+
+    \subsubsection*{Sample Word Problems}
+    \begin{enumerate}
+        \item $X$ is a normally distributed variable with mean $\mu = 30$ and standard deviation $\sigma = 4$. Find:
+            \begin{enumerate}
+                \item $P(x < 40)$
+                \item $P(x > 21)$
+                \item $P(30 < x < 35)$
+            \end{enumerate}
+        \item Act score are normally distributed with mean of $24.2$ and standard deviaton $42$. What is the probability that a student score greater than $31$?.
+        \item Entry to a certain University is determined by a national test. The scores on this test are normally distributed with a mean of $500$ and a standard deviation of $100$. Tom wants to be admitted to this university and he knows that he must score better than at least $70\%$ of the students who took the test. Tom takes the test and scores $585$ Will he be admitted to this university?
+    \end{enumerate}
+
+    \subsubsection*{Graph of Normal Distribution}
+    \newincludegraphics[]{(C)-Normal_distribution_visualization.png}
+
+    \subsection{Exponential}
+    The exponential distribution is a continuous probability distribution that concerns the amount of time until some specific event happens. It is a process in which events happen continuously and independently at a constant average rate.It is represented as $X \sim Exp(\lambda)$. This distribution's probability mass function, mean, and variance is given below.
+
+    \begin{equation}
+        \label{eq:exponential_pdf}
+        f_X(x) = \left\{
+        \begin{array}{ll}
+            {\lambda e^{-\lambda e}} & \mbox{for } x > 0 \\
+            0 & \mbox{for } x \leq 0\\
+        \end{array}
+    \right.
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:exponential_mean}
+        E[X] = \frac{1}{\lambda}
+        \end{equation}
+
+    \begin{equation}
+        \label{eq:exponential_variance}
+        Var[X] = \frac{1}{\lambda^2}
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:exponential_std}
+        Std[X] = \sqrt{\frac{1}{\lambda^2}}
+    \end{equation}
+
+    \subsubsection*{Sample Word Problems}
+    \begin{enumerate}
+        \item On the average, a certain computer part lasts ten years. The length of time the computer part lasts is exponentially distributed. What is the probability that a computer part lasts more than $7$ years?
+        \item Suppose that the length of a phone call, in minutes, is an exponential random variable with decay parameter $112$. The decay parameter is another way to view $1/\lambda$. If another person arrives at a public telephone just before you, find the probability that you will have to wait more than five minutes. Let $X =$ the length of a phone call, in minutes. Calculate $\mu$, and $\sigma$.
+    \end{enumerate}
+
+    \subsubsection*{Graph of Exponential Distribution}
+    \newincludegraphics[]{(C)-Exponential_distribution_visualization.png}
+
+    \subsection{Gamma Distribution}
+    The gamma distribution, like the normal distribution, models natural phenomena that are positively skewed such as the waiting time between events. Unlike the normal distribution, its graph is skewed to the right. Gamma distributions can be represented as $X \sim Gamma(\alpha, \beta)$.
+
+    \begin{equation}
+        \label{eq:gamma_pdf}
+        f_X(x) = \left\{
+        \begin{array}{ll}
+            {\frac{x^{\alpha - 1} e^{\frac{-1}{\beta}x}}{\beta^\alpha\Gamma_\alpha}} & ;, x > 0; (\alpha, \beta > 0) \\
+            0 & \mbox{elsewhere} \\
+        \end{array}
+    \right.
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:gamma_mean}
+        E[X] = \alpha (\alpha + 1) \beta^2
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:gamma_variance}
+        Var[X] = \alpha \beta^2
+    \end{equation}
+
+    \begin{equation}
+        \label{eq:gamma_std}
+        Std[X] = \sqrt{\alpha} \beta
+    \end{equation}
+
+    \subsubsection*{Sample Word Problems}
+    \begin{enumerate}
+        \item In a certain city, the daily consumption of water (in millions of liters) follows approximately a gamma distribution with $\alpha = 2$ and $\beta = 3$. If the daily capacity of that city is $9$ million liters of water, what is the probability that on any given day the water supply is inadequate?
+        \item Suppose $X$ has gamma distribution with parameters $\alpha = 8$ and $\beta = 15$. Compute $P(60 \le X \le 120)$.
+    \end{enumerate}
+
+    \subsubsection*{Graph of Gamma Distribution}
+    \newincludegraphics[]{(C)-Gamma_distribution_visualization.png}
+
+
+    \section{Python Source Codes used to generate the graphs}
+
+    \subsection*{discrete$\_$distribution.py}
+    \lstinputlisting[language=python]{Assignment_3_Res/discrete_distribution.py}
+
+    \subsection*{continuous$\_$distribution\.py}
+    \lstinputlisting[language=python]{Assignment_3_Res/continuous_distribution.py}
+
+\end{document}

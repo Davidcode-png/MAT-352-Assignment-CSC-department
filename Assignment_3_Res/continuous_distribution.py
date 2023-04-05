@@ -1,7 +1,6 @@
 """
     This script was written by computer science student 300 level.
     As an assignment submission for MAT353
-    🤪🤪🤪
 """
 
 import numpy as np
@@ -24,7 +23,7 @@ def visualize_uniform_distribution():
     sb.histplot(samples, element='poly', fill=True, ax=plot_axis[1])
 
     # save visualisation
-    plt.savefig(fname='uniform_distribution_visualization')
+    plt.savefig(fname=plot_name("Uniform"))
     plt.close()
 
 
@@ -44,7 +43,7 @@ def visualize_normal_distribution():
     sb.histplot(samples, element='poly', fill=True, ax=plot_axis[1])
 
     # save visualisation
-    plt.savefig(fname='normal_distribution_visualization')
+    plt.savefig(fname=plot_name("Normal"))
     plt.close()
 
 
@@ -61,7 +60,7 @@ def visualize_exponential_distibution():
     # draws line plot
     sb.histplot(samples, element='poly', fill=True, ax=plot_axis[1])
 
-    plt.savefig(fname='exponential_distribution_visualization')
+    plt.savefig(fname=plot_name("Exponential"))
     plt.close()
 
 
@@ -83,8 +82,14 @@ def visualize_gamma_distribution():
     # draws line plot
     sb.histplot(samples, element='poly', fill=True, ax=plot_axis[1])
 
-    plt.savefig(fname='gamma_distribution_visualization')
+    plt.savefig(fname=plot_name("Gamma"))
     plt.close()
+
+
+def plot_name(dist_name):
+    SAVE_DIR = "Assignment_3_Res/Graphs"
+
+    return f"{SAVE_DIR}/(C)-{dist_name.title()}_distribution_visualization"
 
 
 if __name__ == '__main__':

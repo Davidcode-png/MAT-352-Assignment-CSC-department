@@ -49,7 +49,7 @@ def plot_bernuolli_graph():
 
     # Show the plot
     plt.tight_layout()
-    plt.savefig(fname='Bernoulli_distribution_visualization')
+    plt.savefig(fname=plot_name("Bernoulli"))
 
 
 def plot_binomial_graph():
@@ -90,7 +90,7 @@ def plot_binomial_graph():
     plt.subplots_adjust(hspace=0.4)
 
     # Save the plot
-    plt.savefig(fname='Binomial_distribution_visualization')
+    plt.savefig(fname=plot_name("Binomial"))
 
 
 def plot_geometric_graph():
@@ -106,7 +106,8 @@ def plot_geometric_graph():
     plt.xlabel('Number of Trials')
     plt.ylabel('Probability')
     plt.title('Geometric Distribution (p=0.3)')
-    plt.savefig(fname='Geometric_distribution_visualization')
+    # plt.savefig(fname='Geometric_distribution_visualization')
+    plt.savefig(fname=plot_name("Geometric"))
 
 
 def plot_poisson_graph():
@@ -138,7 +139,14 @@ def plot_poisson_graph():
     plt.subplots_adjust(
         hspace=0.33)
     # Save the plot
-    plt.savefig(fname='Poisson_distribution_visualization')
+    plt.savefig(fname=plot_name("Poisson"))
+
+
+def plot_name(dist_name):
+    SAVE_DIR = "Assignment_3_Res/Graphs"
+
+    return f"{SAVE_DIR}/(D)-{dist_name.title()}_distribution_visualization"
+
 
 
 if __name__ == '__main__':
