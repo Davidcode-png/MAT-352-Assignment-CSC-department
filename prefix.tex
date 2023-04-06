@@ -7,12 +7,17 @@
 \usepackage{fancyhdr}
 \usepackage[auto-lang=false]{lipsum}
 \usepackage{booktabs}
+\usepackage{array,etoolbox}
 
 \setlength{\arrayrulewidth}{0.5mm}
 \setlength{\tabcolsep}{18pt}
 \renewcommand{\arraystretch}{1.5}
 \definecolor{ashgrey}{rgb}{0.7, 0.75, 0.71}
 \definecolor{cadetgrey}{rgb}{0.57, 0.64, 0.69}
+
+\preto\tabular{\setcounter{rowcount}{0}}
+\newcounter{rowcount}
+\newcommand\rownumber{\stepcounter{rowcount}\arabic{rowcount}}
 
 \begin{document}
 
@@ -59,70 +64,72 @@
         \begin{longtable} { c|l|c }
             \toprule[2pt]
             S/N & \multicolumn{1}{|c|}{Name} & Matric Number \\
+            % \multicolumn{1}{@{\makebox[3em][c]{S/N~}} | c |}{\emph{Name}} & {\emph{Matric Number}}\\
             \midrule
-            1 & Adebowale Joseph Akintomiwa & 214846\\
-            2 & Adedapo Anjorin & 214864\\
-            3 & Adegbola Olatunde Williams & 207186\\
-            4 & Adeleke Sherifdeen Adeboye & 214848\\
-            5 & Adeleke Timothy Toluwani & 214849\\
-            6 & Adelowo Samuel Damilare & 214850\\
-            7 & Adeoti Warith Adetayo & 214851\\
-            8 & Adim Chimaobi Solomon & 222455\\
-            9 & Adisa Inioluwa Christiana & 214853\\
-            10 & Ahmad Animasaun & 214863\\
-            11 & Ajayi Prince Ayokunle & 215221\\
-            12 & Akinade Faith Eniola & 222459\\
-            13 & Akinrinola Akinfolarin & 205526\\
-            14 & Akinrinola, Blessing Opemipo & 214857\\
-            15 & Akinwusi Ifeoluwa & 214858\\
-            16 & Alao Tawakalit Omowunmi & 222461\\
-            17 & Alatise Oluwaseun Abraham & 214860\\
-            18 & Arowolo Ayomide Stephen & 214865\\
-            19 & Brai Daniel & 214868\\
-            20 & Chinedu Promise Okafor & 213930\\
-            21 & Daniel Emmanuel Oghenetega & 224870\\
-            22 & Denedo Oghenetega & 214873\\
-            23 & Emiade James & 214874\\
-            24 & Farayola Joshua Olatunde & 214878\\
-            25 & Godwin Daniel & 214871\\
-            26 & Ibraheem Nuh Babatunde & 214879\\
-            27 & Ikwuegbu Michael & 214881\\
-            28 & Kareem Mustapha Babatunde & 214883\\
-            29 & Kayode Peter Temitope & 208077\\
-            30 & Kehinde Boluwatife Soyoye & 214916\\
-            31 & Kip Charles Okechukwu Emeka & 215061\\
-            32 & Mikail Ramadan  & 214887\\
-            33 & Kubiat Laura & 214884\\
-            34 & Lawal Uchechukwu Adebayo & 214885\\
-            35 & Matthews Victoria Olayide & 214886\\
-            36 & Nwatu Chidinma Augustina & 214890\\
-            37 & Odulate Oluwatobi Gabriel & 214893\\
-            38 & Ogbolu Precious Chiamaka & 214894\\
-            39 & Oghie Daniel O. & 214895\\
-            40 & Ogunesan Rhoda Oluwatosin & 214897\\
-            41 & Ogunyemi Temidayo Samuel & 214898\\
-            42 & Ojewale Opeoluwa David & 214899\\
-            43 & Okafor Lisa Chisom & 214901\\
-            44 & Okoro Joshua Akachukwu & 214902\\
-            45 & Okumagba Oghenerukevwe Miracle & 222498\\
-            46 & Olagidi Joshua & 222500\\
-            47 & Olalere Khadijat Titilayo & 222502\\
-            48 & Olatunji Michael Oluwayemi & 214903\\
-            49 & Olawale Eniola Emmanuel & 214904\\
-            50 & Olorogun Ebikabowei Caleb & 214906\\
-            51 & Oluwatade Iyanuoluwa & 214907\\
-            52 & Oluwayelu Oluwanifise & 215257\\
-            53 & Onasoga Oluwapelumi Idris & 214909\\
-            54 & Oyekanmi Eniola & 214913\\
-            55 & Sadiq Peter & 214914\\
-            56 & Salami Lateefat Abimbola & 214915\\
-            57 & Stephen Chidiebere Ivuelekwa & 214882\\
-            58 & Toluwanimi Oluwabukunmi Osuolale & 214912\\
-            59 & Ubaka Amazing-Grace Onyiyechukwu & 214918\\
-            60 & Uchechukwu Ahunanya & 214854\\
-            61 & Wisdom Oyor & 215206\\
-            62 & Cole Matthew Olamilaekan & 223942\\
-            63 & Safiu Waheed & 206454\\
+            \rownumber\space & Akinrinola Akinfolarin & 205526 \\
+            \rownumber\space & Safiu Waheed & 206454 \\
+            \rownumber\space & Adegbola Olatunde Williams & 207186 \\
+            \rownumber\space & Kayode Peter Temitope & 208077 \\
+            \rownumber\space & Chinedu Promise Okafor & 213930 \\
+            \rownumber\space & Adebowale Joseph Akintomiwa & 214846 \\
+            \rownumber\space & Adeleke Sherifdeen Adeboye & 214848 \\
+            \rownumber\space & Adeleke Timothy Toluwani & 214849 \\
+            \rownumber\space & Adelowo Samuel Damilare & 214850 \\
+            \rownumber\space & Adeoti Warith Adetayo & 214851 \\
+            \rownumber\space & Adisa Inioluwa Christiana & 214853 \\
+            \rownumber\space & Uchechukwu Ahunanya & 214854 \\
+            \rownumber\space & Akinrinola Blessing Opemipo & 214857 \\
+            \rownumber\space & Akinwusi Ifeoluwa & 214858 \\
+            \rownumber\space & Alatise Oluwaseun Abraham & 214860 \\
+            \rownumber\space & Ahmad Animasaun & 214863 \\
+            \rownumber\space & Adedapo Anjorin & 214864 \\
+            \rownumber\space & Arowolo Ayomide Stephen & 214865 \\
+            \rownumber\space & Brai Daniel & 214868 \\
+            \rownumber\space & Godwin Daniel & 214871 \\
+            \rownumber\space & Denedo Oghenetega & 214873 \\
+            \rownumber\space & Emiade James & 214874 \\
+            \rownumber\space & Farayola Joshua Olatunde & 214878 \\
+            \rownumber\space & Ibraheem Nuh Babatunde & 214879 \\
+            \rownumber\space & Ikwuegbu Michael & 214881 \\
+            \rownumber\space & Stephen Chidiebere Ivuelekwa & 214882 \\
+            \rownumber\space & Kareem Mustapha Babatunde & 214883 \\
+            \rownumber\space & Kubiat Laura & 214884 \\
+            \rownumber\space & Lawal Uchechukwu Adebayo & 214885 \\
+            \rownumber\space & Matthews Victoria Olayide & 214886 \\
+            \rownumber\space & Mikail Ramadan & 214887 \\
+            \rownumber\space & Nwatu Chidinma Augustina & 214890 \\
+            \rownumber\space & Odulate Oluwatobi Gabriel & 214893 \\
+            \rownumber\space & Ogbolu Precious Chiamaka & 214894 \\
+            \rownumber\space & Oghie Daniel O & 214895 \\
+            \rownumber\space & Ogunesan Rhoda Oluwatosin & 214897 \\
+            \rownumber\space & Ogunyemi Temidayo Samuel & 214898 \\
+            \rownumber\space & Ojewale Opeoluwa David & 214899 \\
+            \rownumber\space & Okafor Lisa Chisom & 214901 \\
+            \rownumber\space & Okoro Joshua Akachukwu & 214902 \\
+            \rownumber\space & Olatunji Michael Oluwayemi & 214903 \\
+            \rownumber\space & Olawale Eniola Emmanuel & 214904 \\
+            \rownumber\space & Olorogun Ebikabowei Caleb & 214906 \\
+            \rownumber\space & Oluwatade Iyanuoluwa & 214907 \\
+            \rownumber\space & Onasoga Oluwapelumi Idris & 214909 \\
+            \rownumber\space & Osanebi Emmanuel & 214910 \\
+            \rownumber\space & Toluwanimi Oluwabukunmi Osuolale & 214912 \\
+            \rownumber\space & Oyekanmi Eniola & 214913 \\
+            \rownumber\space & Sadiq Peter & 214914 \\
+            \rownumber\space & Salami Lateefat Abimbola & 214915 \\
+            \rownumber\space & Kehinde Boluwatife Soyoye & 214916 \\
+            \rownumber\space & Ubaka Amazing-Grace Onyiyechukwu & 214918 \\
+            \rownumber\space & Kip Charles Okechukwu Emeka & 215061 \\
+            \rownumber\space & Wisdom Oyor & 215206 \\
+            \rownumber\space & Ajayi Prince Ayokunle & 215221 \\
+            \rownumber\space & Oluwayelu Oluwanifise & 215257 \\
+            \rownumber\space & Adim Chimaobi Solomon & 222455 \\
+            \rownumber\space & Akinade Faith Eniola & 222459 \\
+            \rownumber\space & Alao Tawakalit Omowunmi & 222461 \\
+            \rownumber\space & Okumagba Oghenerukevwe Miracle & 222498 \\
+            \rownumber\space & Olagidi Joshua & 222500 \\
+            \rownumber\space & Olalere Khadijat Titilayo & 222502 \\
+            \rownumber\space & Cole Matthew Olamilaekan & 223942 \\
+            \rownumber\space & Daniel Emmanuel Oghenetega & 224870 \\
             \bottomrule[4pt]
         \end{longtable}
         \normalsize
